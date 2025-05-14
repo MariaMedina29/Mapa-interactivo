@@ -369,8 +369,8 @@ footer{
     @supports (padding: env(safe-area-inset-bottom)) {
 
         footer{
-            /*bottom: calc(env(safe-area-inset-bottom));*/
-            padding: 6px 6px calc(6px + env(safe-area-inset-bottom)) 6px;
+            bottom: calc(env(safe-area-inset-bottom));
+            /*padding: 6px 6px calc(6px + env(safe-area-inset-bottom)) 6px;*/
         }
 
         .card{

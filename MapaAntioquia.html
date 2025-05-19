@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colombia</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles1.css">
+    <script src="script.js"></script>
+    <script src="script1.js"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/hmu6tii.css">
+</head>
+<body>
+
+    <div class="newcircle" style="bottom: 50%; height: 100%; width:150%; position: absolute; background: #3e91d4; border-radius: 50%; transition: all 1.5s ease-in-out; pointer-events: none; z-index: 0;"></div>
+    <div class="newCard" style="width: 50% ;height: 60%;background: #E7F0FE; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); position: absolute; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden;"></div>
+
+    <div class="circle" style="bottom: -10%; height: 150%; width:300%;"></div>
+    <div class="card" style="width: 70%;">
+        <div class="card-content">
+        <p class="tituloMap" style="z-index: 0;">
+            ANTIOQUIA
+        </p>
+            <div class="map-container">
+            
+                
+
+                <div class="SecuenciaMapa" style="opacity: 1;position: relative;width: 80%;">
+                    <img id="secuenciaImagen" src="Img/Antioquia/Secuencia/MapaR_00034.png" alt="Mapa Interactivo" style="width: 100%;">
+                </div>
+
+                <div id="listaZonas" class="lista" style="height: 40%;">
+                    <div class="tituloLocalidades">Municipios</div>
+                    <div class="contenido-lista">
+                        <span class="zona-lista2" >🔴 Barbosa</span>
+                        <span class="zona-lista2" >🔴 Girardota</span>
+                        <span class="zona-lista2"> 🔴 Copacabana</span>
+                        <span class="zona-lista" data-zona="Bello">🟢 Bello</span>
+                        <span class="zona-lista" data-zona="Medellín">🟢 Medellín</span>
+                        <span class="zona-lista2" >🔴 Itagüí</span>
+                        <span class="zona-lista2">🔴 La Estrella</span>
+                        <span class="zona-lista2" >🔴 Sabaneta</span>
+                        <span class="zona-lista" data-zona="Envigado">🟢 Envigado</span>
+                        <span class="zona-lista2" >🔴 Caldas</span>
+                        <span class="zona-lista2" >🔴 Concepción</span>
+                        <span class="zona-lista2" >🔴 San Vicente Ferrer</span>
+                        <span class="zona-lista2" >🔴 Guarne</span>
+                        <span class="zona-lista" data-zona="Rionegro">🟢 Rionegro</span>
+                        <span class="zona-lista2" >🔴 El Retiro</span>
+                    </div>
+                    
+                </div>     
+                
+                <style>
+                    .card, .circle {
+                        opacity: 0;
+                        transition: opacity 1s ease;
+                    }
+                    .newcircle, .newCard {
+                        transition: all 1.5s ease-in-out, opacity 1s ease;
+                    }
+                    #secuenciaImagen {
+                        transition: opacity 1s ease;
+                    }
+
+                    
+                </style>
+                
+                <script>
+
+                window.addEventListener("DOMContentLoaded", () => {
+                    const card = document.querySelector('.card');
+                    const circle = document.querySelector('.circle');
+
+                    const newCard = document.querySelector('.newCard');
+                    const newCircle = document.querySelector('.newcircle');
+
+                    if (card && circle) {
+                            // Calcular altura
+                            const cardHeight = card.scrollHeight;
+                            console.log("Altura actual de la tarjeta (cardHeight):", cardHeight, "px");
+
+                            // Aumentar opacidad para que aparezcan
+                            setTimeout(() => {
+                                card.style.opacity = 1;
+                                circle.style.opacity = 1;
+                            }, 1500); // pequeño retraso para asegurar que todo esté cargado
+
+                            if (newCard && newCircle) {
+                                // Usamos el mismo cardHeight de 'card' para 'newCard'
+                                console.log("Usando altura de card para animar newCard:", cardHeight, "px");
+
+                                // Pequeño timeout para que se vea la aparición
+                                setTimeout(() => {
+                                    // 1. Hacer visibles
+                                    newCard.style.opacity = "1";
+                                    newCircle.style.opacity = "1";
+
+                                    // 2. Animar propiedades
+                                    newCard.style.width = "70%";
+                                    newCard.style.height = `${cardHeight - 57}px`;
+
+                                    newCircle.style.width = "300%";
+                                    newCircle.style.height = "150%";
+                                    newCircle.style.bottom = "-10%";
+                                }, 0); // pequeño retardo para que cargue todo
+
+                            }
+                        }
+                });
+
+                // Variable global para saber si la animación ya terminó
+                window.animacionTerminada = false;
+
+                window.reproducirAnimacion = function () {
+                    // Si ya terminó la animación, no la vuelvas a reproducir
+                    if (window.animacionTerminada) {
+                        return;
+                    }
+
+                    let imagenActual = 34;
+                    const imagenFinal = 120;
+                    const imagen = document.getElementById('secuenciaImagen');
+
+                    const numeroConCeros = imagenActual.toString().padStart(5, '0');
+                    imagen.src = `Img/Antioquia/Secuencia/MapaR_${numeroConCeros}.png`;
+
+                    clearInterval(window.intervaloAnimacion);
+
+                    // Ocultar elementos interactivos al inicio
+                    const areaInteractiva = document.querySelector('.area-interactiva');
+
+                    const zonaBarbosa = document.getElementById('zonaBarbosa');
+                    const imgBarbosa = document.getElementById('imgBarbosa');
+
+                    const zonaConcepcion = document.getElementById('zonaConcepcion');
+                    const imgConcepcion = document.getElementById('imgConcepcion');
+
+                    const zonaGirardota = document.getElementById('zonaGirardota');
+                    const imgGirardota = document.getElementById('imgGirardota');
+
+                    const zonaSanVicente = document.getElementById('zonaSanVicente');
+                    const imgSanVicente = document.getElementById('imgSanVicente');
+
+                    const zonaCopacabana = document.getElementById('zonaCopacabana');
+                    const imgCopacabana = document.getElementById('imgCopacabana');
+
+                    const zonaGuarne = document.getElementById('zonaGuarne');
+                    const imgGuarne = document.getElementById('imgGuarne');
+
+                    const zonaRionegro = document.getElementById('zonaRionegro');
+                    const imgRionegro = document.getElementById('imgRionegro');
+
+                    const zonaBello = document.getElementById('zonaBello');
+                    const imgBello = document.getElementById('imgBello');
+
+                    const zonaMedellín = document.getElementById('zonaMedellín');
+                    const imgMedellin = document.getElementById('imgMedellin');
+
+                    const zonaItagui = document.getElementById('zonaItagui');
+                    const imgItagui = document.getElementById('imgItagui');
+
+                    const zonaEstrella = document.getElementById('zonaEstrella');
+                    const imgEstrella = document.getElementById('imgEstrella');
+
+                    const zonaSabaneta = document.getElementById('zonaSabaneta');
+                    const imgSabaneta = document.getElementById('imgSabaneta');
+
+                    const zonaEnvigado = document.getElementById('zonaEnvigado');
+                    const imgEnvigado = document.getElementById('imgEnvigado');
+
+                    const zonaRetiro =  document.getElementById('zonaRetiro');
+                    const imgRetiro = document.getElementById('imgRetiro');
+
+                    const zonaCaldas =  document.getElementById('zonaCaldas');
+                    const imgCaldas = document.getElementById('imgCaldas');
+
+
+                    if (areaInteractiva) areaInteractiva.style.display = "none";
+
+                    if (zonaBarbosa) zonaBarbosa.style.display = "none";
+                    if (imgBarbosa) imgBarbosa.style.display = "none";
+
+                    if (zonaConcepcion) zonaConcepcion.style.display = "none";
+                    if (imgConcepcion) imgConcepcion.style.display = "none";
+
+                    if (zonaGirardota) zonaGirardota.style.display = "none";
+                    if (imgGirardota) imgGirardota.style.display = "none";
+
+                    if (zonaSanVicente) zonaSanVicente.style.display = "none";
+                    if (imgSanVicente) imgSanVicente.style.display = "none";
+
+                    if (zonaCopacabana) zonaCopacabana.style.display = "none";
+                    if (imgCopacabana) imgCopacabana.style.display = "none";
+
+                    if (zonaGuarne) zonaGuarne.style.display = "none";
+                    if (imgGuarne) imgGuarne.style.display = "none";
+
+                    if (zonaRionegro) zonaRionegro.style.display = "none";
+                    if (imgRionegro) imgRionegro.style.display = "none";
+
+                    if (zonaBello) zonaBello.style.display = "none";
+                    if (imgBello) imgBello.style.display = "none";
+
+                    if (zonaMedellín) zonaMedellín.style.display = "none";
+                    if (imgMedellin) imgMedellin.style.display = "none";
+
+                    if(zonaItagui) zonaItagui.style.display = "none";
+                    if (imgItagui) imgItagui.style.display = "none";
+
+                    if (zonaEstrella) zonaEstrella.style.display = "none";
+                    if (imgEstrella) imgEstrella.style.display = "none";
+
+                    if (zonaSabaneta) zonaSabaneta.style.display = "none";
+                    if (imgSabaneta) imgSabaneta.style.display = "none";
+
+                    if (zonaEnvigado) zonaEnvigado.style.display = "none";
+                    if (imgEnvigado) imgEnvigado.style.display = "none";
+
+                    if (zonaRetiro) zonaRetiro.style.display = "none";
+                    if (imgRetiro) imgRetiro.style.display = "none";
+
+                    if (zonaCaldas) zonaCaldas.style.display = "none";
+                    if (imgCaldas) imgCaldas.style.display = "none";
+
+                    setTimeout(() => {
+                        window.intervaloAnimacion = setInterval(() => {
+                            imagenActual++;
+                            if (imagenActual <= imagenFinal) {
+                                const numeroConCeros = imagenActual.toString().padStart(5, '0');
+                                imagen.src = `Img/Antioquia/Secuencia/MapaR_${numeroConCeros}.png`;
+                            } else {
+                                clearInterval(window.intervaloAnimacion);
+                                window.animacionTerminada = true; // Marcar como completada
+
+                                setTimeout(() => {
+                                    imagen.style.opacity = "0";
+                                }, 200);
+
+                                // Mostrar elementos interactivos una vez termine la animación
+                                if (areaInteractiva) areaInteractiva.style.display = "block";
+
+                                if (zonaBarbosa) zonaBarbosa.style.display = "block";
+                                if (imgBarbosa) imgBarbosa.style.display = "block";
+
+                                if (zonaConcepcion) zonaConcepcion.style.display = "block";
+                                if (imgConcepcion) imgConcepcion.style.display = "block";
+
+                                if (zonaGirardota) zonaGirardota.style.display = "block";
+                                if (imgGirardota) imgGirardota.style.display = "block";
+
+                                if (zonaSanVicente) zonaSanVicente.style.display = "block";
+                                if (imgSanVicente) imgSanVicente.style.display = "block";
+
+                                if (zonaCopacabana) zonaCopacabana.style.display = "block";
+                                if (imgCopacabana) imgCopacabana.style.display = "block";
+
+                                if (zonaGuarne) zonaGuarne.style.display = "block";
+                                if (imgGuarne) imgGuarne.style.display = "block";
+
+                                if (zonaRionegro) zonaRionegro.style.display = "block";
+                                if (imgRionegro) imgRionegro.style.display = "block";
+
+                                if (zonaBello) zonaBello.style.display = "block";
+                                if (imgBello) imgBello.style.display = "block";
+                                
+                                if (zonaMedellín) zonaMedellín.style.display = "block";
+                                if (imgMedellin) imgMedellin.style.display = "block";
+
+                                if (zonaItagui) zonaItagui.style.display = "block";
+                                if (imgItagui) imgItagui.style.display = "block";
+
+                                if (zonaEstrella) zonaEstrella.style.display = "block";
+                                if (imgEstrella) imgEstrella.style.display = "block";
+
+                                if (zonaSabaneta) zonaSabaneta.style.display = "block";
+                                if (imgSabaneta) imgSabaneta.style.display = "block";
+
+                                if (zonaEnvigado) zonaEnvigado.style.display = "block";
+                                if (imgEnvigado) imgEnvigado.style.display = "block";
+
+                                if (zonaRetiro) zonaRetiro.style.display = "block";
+                                if (imgRetiro) imgRetiro.style.display = "block";
+
+                                if(zonaCaldas) zonaCaldas.style.display = "block";
+                                if (imgCaldas) imgCaldas.style.display = "block";
+                            }
+                        }, 50);
+                    }, 1000);
+                };
+
+                // Si ya se mostró el modal antes, iniciar animación directamente (solo una vez)
+                if (sessionStorage.getItem("modalShownBogota")) {
+                    window.addEventListener("DOMContentLoaded", () => {
+                        if (document.getElementById('secuenciaImagen')) {
+                            setTimeout(() => {
+                                window.reproducirAnimacion();
+                            }, 2000);
+                        }
+                    });
+                }
+
+                const INFORIONEGRO = `
+                    <h2>ZONA RIONEGRO</h2>
+                    
+                    <div class="info-content">
+                        <div class="Barrio">
+                            <img src="Img/Tienda.png" alt="Tienda en Suba">
+                            <h6>ALMACEN RIONEGRO</h6>
+                        </div>
+                        <div class="info-text">
+                            <h3><strong>Dirección:</strong> <br>📍 Calle 43 # 54 - 139 Etapa 3.</h3>
+                            <h3><strong>Teléfono: </strong><br>📞 018000127373.</h3>
+                            <h3><strong>Horario: </strong><br>📅 8 am - 8 pm.</h3>
+                        </div>
+                    </div>`;
+                
+                const INFOBELLO = `<h2>MUNICIPIO BELLO</h2>
+                <div class="info-content">
+                    <div class="Barrio">
+                        <img src="Img/Tienda.png" alt="Tienda en Suba">
+                        <h6>ALMACEN BELLO</h6>
+                    </div>
+                    <div class="info-text">
+                        <h3><strong>Dirección:</strong> <br>📍 Diagonal 51 # 34 - 16.</h3>
+                        <h3><strong>Teléfono: </strong><br>📞 018000127373.</h3>
+                        <h3><strong>Horario: </strong><br>📅 8 am - 9 pm.</h3>
+                    </div>
+                </div>`;
+
+                const INFOENVIGADO = `<h2>MUNICIPIO ENVIGADO</h2>
+                <div class="info-content">
+                    <div class="Barrio">
+                        <img src="Img/Tienda.png" alt="Tienda en Suba">
+                        <h6>ALMACEN ENVIGADO</h6>
+                    </div>
+                    <div class="info-text">
+                        <h3><strong>Dirección:</strong> <br>📍 Carrera 49 # 32b sur - 24.</h3>
+                        <h3><strong>Teléfono: </strong><br>📞 018000127373.</h3>
+                        <h3><strong>Horario: </strong><br>📅 8 am - 9 pm.</h3>
+                    </div>
+                </div>`;
+
+                const INFOMEDELLIN = `<h2>MUNICIPIO MEDELLÍN</h2>
+                    <div class="info-content">
+                        <div class="tiendas">
+                            <div class="imgtienda">
+                                <div class="Barrio">
+                                    <img src="Img/Tienda.png" alt="Tienda en Martires">
+                                    <h4>ALMACEN INDUSTRIALES</h2>
+                                </div>
+                                <div class="info-text2">
+                                    <h5><strong>Dirección: </strong><br>📍 Av Los Industriales # 14 - 135.</h5>
+                                    <h5><strong>Teléfono: </strong><br>📞 320 8899933.</h5>
+                                    <h5><strong>Horario: </strong><br>📅 7 am - 8 pm.</h5>
+                                </div>
+                            </div>
+                            
+                            <div class="line"></div>
+
+                            <div class="imgtienda">
+                                <div class="Barrio">
+                                    <img src="Img/Tienda.png" alt="Tienda en Martires">
+                                    <h4>ALMACEN MOLINOS</h2>
+                                </div>
+                                <div class="info-text2">
+                                    <h5><strong>Dirección: </strong><br>📍 Calle 30a # 82a - 26.</h5>
+                                    <h5><strong>Teléfono: </strong><br>📞 018000127373.</h5>
+                                    <h5><strong>Horario: </strong><br>📅 8 am - 9 pm.</h5>
+                                </div>
+                            </div>
+
+                            <div class="line"></div>
+
+                            <div class="imgtienda">
+                                <div class="Barrio">
+                                    <img src="Img/Tienda.png" alt="Tienda en Martires">
+                                    <h4>ALMACEN SAN JUAN</h2>
+                                </div>
+                                <div class="info-text2">
+                                    <h5><strong>Dirección: </strong><br>📍 Calle 44 # 65 - 100.</h5>
+                                    <h5><strong>Teléfono: </strong><br>📞 018000127373.</h5>
+                                    <h5><strong>Horario: </strong><br>📅 8 am - 8 pm.</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    
+                    const ZONAS_INFO = {
+                        Rionegro: INFORIONEGRO,
+                        Bello: INFOBELLO,
+                        Medellín: INFOMEDELLIN,
+                        Envigado: INFOENVIGADO
+                    };
+
+                    const MAPEO_ZONAS = {
+                        "RIONEGRO": "Rionegro",
+                        "BELLO": "Bello",
+                        "MEDELLÍN": "Medellín",
+                        "ENVIGADO": "Envigado"
+                    };
+                </script>
+
+                <!--BARBOSA-->
+                <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaBarbosa"
+                style="display: none; position: absolute; top: 7%; left: 42.5%; width: 18%; height: 25%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                <polygon points="-30,40 10,40 40,10 68,1 105,10 130,30 128,35 105,65 95,68 85,78 70,80 68,85 55,88 45,97 40,95 30,87 -3,100 -4,75 -10,74 -9,68 -23,50" 
+                    style="pointer-events: auto;" 
+                    fill="rgba(0, 255, 0, 0)"
+                    stroke="black"
+                    stroke-width="0"
+                    data-nombre="Barbosa: No contamos con tienda en este municipio."
+                    onmouseover="cambiarOpacidad('imgBarbosa', 0.4), mostrarTooltip(event)"
+                    onmouseout="cambiarOpacidad('imgBarbosa', 0.5), ocultarTooltip()"
+                    onmousemove="moverTooltip(event)">
+                </polygon>
+                </svg>
+
+                <div id="zonaBarbosa" class="zona Barbosa" style="position: absolute; z-index: 1;">
+                    <img id="imgBarbosa" src="Img/Antioquia/1.png" style="display: none;position: absolute;top: -1%;left: -2%;opacity: 0.5;transform: rotate(9deg);z-index: 2;filter: none;width: 100%;"data-opacidad="0.5">
+                </div>
+
+                <!--CONCEPCION-->
+                <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaConcepcion"
+                style="display: none; position: absolute; top: 20%; left: 52%; width: 12%; height: 24%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                <polygon points="  -3,32 0,25 16,25 18,20 36,18 40,10 60,3 72,10 85,20 88,30 100,35 105,58 95,58 95,70 80,105 60,95 50,80 45,70 35,70 30,80 20,75 23,65 17,70 0,50" 
+                    style="pointer-events: auto;" 
+                    fill="rgba(0, 255, 0, 0)"
+                    stroke="black"
+                    stroke-width="0"
+                    data-nombre="Concepcion: No contamos con tienda en este municipio."
+                    onmouseover="cambiarOpacidad('imgConcepcion', 0.4), mostrarTooltip(event)"
+                    onmouseout="cambiarOpacidad('imgConcepcion', 0.5), ocultarTooltip()"
+                    onmousemove="moverTooltip(event)">
+                </polygon>
+                </svg>
+
+                <div id="zonaConcepcion" class="zona Concepcion" style="position: absolute; z-index: 1;">
+                    <img id="imgConcepcion" src="Img/Antioquia/2.png" style="display: none;position: absolute; width: 105%;top: 2%;left: -4%;opacity: 0.5;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="0.5">
+                </div>
+
+                <!--GIRARDOTTA-->
+                <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaGirardota"
+                style="display: none; position: absolute; top: 19%; left: 39%;  width: 8%; height: 24%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                <polygon points="20,-5 35,-12 40,-13 57,-10 60,0 66,0 70,15 80,30 80,35 90,35 90,70  75,70 75,90 60,90 53,95 53,120 30,97 10,70 10,45 20,45 10,30" 
+                    style="pointer-events: auto;" 
+                    fill="rgba(0, 255, 0, 0)"
+                    stroke="black"
+                    stroke-width="0"
+                    data-nombre="Girardota: No contamos con tienda en este municipio."
+                    onmouseover="cambiarOpacidad('imgGirardota', 0.4), mostrarTooltip(event)"
+                    onmouseout="cambiarOpacidad('imgGirardota', 0.5), ocultarTooltip()"
+                    onmousemove="moverTooltip(event)">
+                </polygon>
+                </svg>
+
+                <div id="zonaGirardota" class="zona Girardota" style="position: absolute; z-index: 1;">
+                    <img id="imgGirardota" src="Img/Antioquia/3.png" style="display: none;position: absolute; width: 93%;top: 3%;left: 3%;opacity: 0.5 ;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="0.5">
+                </div>
+
+                <!--SAN VICENTE-->
+                <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaSanVicente"
+                style="display: none; position: absolute; top: 29%; left: 45%; width: 12%; height: 26%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                <polygon points="8,12 25,13 30,5 50,0 60,10 68,8 70,20 84,37 92,35 90,40 102,70 102,75 67,85 58,82 53,93 30,98 30,92 15,94 10,90 5,75 10,70 8,65 10,55 17,40 10,30" 
+                    style="pointer-events: auto;" 
+                    fill="rgba(0, 255, 0, 0)"
+                    stroke="black"
+                    stroke-width="0"
+                    data-nombre="San Vicente Ferrer: No contamos con tienda en este municipio."
+                    onmouseover="cambiarOpacidad('imgSanVicente', 0.4), mostrarTooltip(event)"
+                    onmouseout="cambiarOpacidad('imgSanVicente', 0.5), ocultarTooltip()"
+                    onmousemove="moverTooltip(event)">
+                </polygon>
+                </svg>
+
+                <div id="zonaSanVicente" class="zona SanVicente" style="position: absolute; z-index: 1;">
+                    <img id="imgSanVicente" src="Img/Antioquia/4.png" style="display: none;position: absolute; width: 106%;top: -1%;left: -2%;opacity: 0.5 ;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="0.5">
+                </div>
+
+                <!--COPACABANA-->
+                <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaCopacabana"
+                style="display: none; position: absolute;top: 21%;left: 35%;width: 7%;height: 25%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                <polygon points="10,15 20,5 35,10 40,-6 90,-30 75,8 80,35 72,45 70,68 85,85 90,100 75,110 63,105 60,115 50,120 55,130 24,120 12,125 5,75 20,75 30,66 32,48" 
+                    style="pointer-events: auto;" 
+                    fill="rgba(0, 255, 0, 0)"
+                    stroke="black"
+                    stroke-width="0"
+                    data-nombre="Copacabana: No contamos con tienda en este municipio."
+                    onmouseover="cambiarOpacidad('imgCopacabana', 0.4), mostrarTooltip(event)"
+                    onmouseout="cambiarOpacidad('imgCopacabana', 0.5), ocultarTooltip()"
+                    onmousemove="moverTooltip(event)">
+                </polygon>
+                </svg>
+
+                <div id="zonaCopacabana" class="zona Copacabana" style="position: absolute; z-index: 1;">
+                    <img id="imgCopacabana" src="Img/Antioquia/5.png" style="display: none;position: absolute; width: 99%;top: -1%;left: 5%;opacity: 0.5 ;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="0.5">
+                </div>
+
+                <!--GUARNE-->
+                <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaGuarne"
+                style="display: none; position: absolute;top: 37%;left: 38%;width: 10%;height: 24%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                <polygon points="10,28 20,27 20,20 25,15 25,12 37,15 37,10 50,7 65,23 65,3 82,0 86,5 86,10 93,15 90,35 85,40 87,55 82,60 88,78 82,82 78,90 58,92 53,96 45,95 40,90 30,98 15,97 5,75 20,72 25,66 15,55 12,48" 
+                    style="pointer-events: auto;" 
+                    fill="rgba(0, 255, 0, 0)"
+                    stroke="black"
+                    stroke-width="0"
+                    data-nombre="Guarne: No contamos con tienda en este municipio."
+                    onmouseover="cambiarOpacidad('imgGuarne', 0.4), mostrarTooltip(event)"
+                    onmouseout="cambiarOpacidad('imgGuarne', 0.5), ocultarTooltip()"
+                    onmousemove="moverTooltip(event)">
+                </polygon>
+                </svg>
+
+                <div id="zonaGuarne" class="zona Guarne" style="position: absolute; z-index: 1;">
+                    <img id="imgGuarne" src="Img/Antioquia/6.png" style="display: none;position: absolute; width: 93%;top: -3%;left: 1%;opacity: 0.5 ;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="0.5">
+                </div>
+
+                <!--RIONEGRO-->
+                <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaRionegro"
+                style="display: none; position: absolute;top: 55%;left: 40%;width: 11%;height: 27%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                <polygon points="4,2 10,5 10,10 32,3 38,15 40,8 48,5 65,3 70,-5 76,-8 82,-2 95,-2 98,23 81,24 75,30 78,40 80,55 75,62 75,70 53,72 56,93 48,102 14,97 0,70 -10,15 -10,40" 
+                    style="pointer-events: auto;" 
+                    fill="rgba(0, 255, 0, 0)"
+                    stroke="black"
+                    stroke-width="0"
+                    data-nombre="Rionegro"
+                    onclick="mostrarInfo(event, INFORIONEGRO); seleccionarZona('zonaRionegro')"
+                    onmouseover="cambiarOpacidad('imgRionegro', 0.5), cambiarColor('imgRionegro', 'grayscale(0%)'); mostrarTooltip(event)"
+                    onmouseout="cambiarOpacidad('imgRionegro', 1), cambiarColor('imgRionegro', 'grayscale(80%)'); ocultarTooltip()"
+                    onmousemove="moverTooltip(event)">
+                </polygon>
+                </svg>
+
+                <div id="zonaRionegro" class="zona Rionegro" style="position: absolute; z-index: 1;">
+                    <img id="imgRionegro" src="Img/Antioquia/7.png" style="display: none;position: absolute; top: -4.6%; left: -7%;;opacity: 1;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="1">
+                </div>
+
+                <!--BELLO-->
+                <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaBello"
+                style="display: none; position: absolute;top: 21%;left: 25%;width: 12.5%;height: 27%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                <polygon points="0,30 12,25 35,25 50,8 55,9 60,3 65,0 80,10 81,24 85,35 90,30 94,32 92,40 100,53 98,67 90,72 85,72 88,99 73,90 65,83 38,85 10,70" 
+                    style="pointer-events: auto;" 
+                    fill="rgba(0, 255, 0, 0)"
+                    stroke="black"
+                    stroke-width="0"
+                    data-nombre="Bello"
+                    onclick="mostrarInfo(event, INFOBELLO); seleccionarZona('zonaBello')"
+                    onmouseover="cambiarOpacidad('imgBello', 0.5), cambiarColor('imgBello', 'grayscale(0%)'); mostrarTooltip(event)"
+                    onmouseout="cambiarOpacidad('imgBello', 1), cambiarColor('imgBello', 'grayscale(80%)'); ocultarTooltip()"
+                    onmousemove="moverTooltip(event)">
+                </polygon>
+                </svg>
+
+                <div id="zonaBello" class="zona Bello" style="position: absolute; z-index: 1;">
+                    <img id="imgBello" src="Img/Antioquia/8.png" style="display: none;position: absolute; top: -2%;left: 1%; opacity: 1;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="1">
+                </div>
+
+                <!--MEDELLIN-->
+                <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaMedellín"
+                style="display: none; position: absolute;top: 27%;left: 22%;width: 18.5%;height: 41%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                <polygon points="8,0 25,5 25,11 30,18 30,25 35,32 46,36 48,40 53,38 60,40 65,40 80,50  82,47 90,53 93,59 90,62 98,75 89,77 88,81 93,87 90,90 90,95 85,92 82,93 72,88 67,98 56,95 40,83 27,83 27,90 10,90 3,70" 
+                    style="pointer-events: auto;" 
+                    fill="rgba(0, 255, 0, 0)"
+                    stroke="black"
+                    stroke-width="0"
+                    data-nombre="Medellín"
+                    onclick="mostrarInfo(event, INFOMEDELLIN); seleccionarZona('zonaMedellín')"
+                    onmouseover="cambiarOpacidad('imgMedellin', 0.5), cambiarColor('imgMedellin', 'grayscale(0%)'); mostrarTooltip(event)"
+                    onmouseout="cambiarOpacidad('imgMedellin', 1), cambiarColor('imgMedellin', 'grayscale(80%)'); ocultarTooltip()"
+                    onmousemove="moverTooltip(event)">
+                </polygon>
+                </svg>
+
+                <div id="zonaMedellín" class="zona Medellín" style="position: absolute; z-index: 1;">
+                    <img id="imgMedellin" src="Img/Antioquia/9.png" style="display: none;position: absolute;top: 8%;left: 1%; opacity: 1;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="1">
+                </div>
+
+                <!--ITAGUI-->
+                <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaItagui"
+                style="display: none; position: absolute;top: 60%;left: 27%;width: 5%;height: 9%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                <polygon points="10,20 20,27 20,20 25,15 37,15 37,20 65,17 90,25 110,50 75,78 78,85 20,95 10,75 -10,65 12,48" 
+                    style="pointer-events: auto;" 
+                    fill="rgba(0, 255, 0, 0)"
+                    stroke="black"
+                    stroke-width="0"
+                    data-nombre="Itagüí: No contamos con tienda en este municipio."
+                    onmouseover="cambiarOpacidad('imgItagui', 0.4), mostrarTooltip(event)"
+                    onmouseout="cambiarOpacidad('imgItagui', 0.5), ocultarTooltip()"
+                    onmousemove="moverTooltip(event)">
+                </polygon>
+                </svg>
+
+                <div id="zonaItagui" class="zona Itagui" style="position: absolute; z-index: 1;">
+                    <img id="imgItagui" src="Img/Antioquia/10.png" style="display: none;position: absolute; width: 101%;top: 3%;left: -1%;opacity: 0.5 ;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="0.5">
+                </div>
+
+                <!--ESTRELLA-->
+                <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaEstrella"
+                style="display: none; position: absolute;top: 65.5%;left: 25.6%;width: 5%;height: 13%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                <polygon points="0,-10 20,-15 60,5 60,10 70,20 60,30 60,50 65,50 65,60 90,78 55,95 48,85 20,85 -10,75 5,48" 
+                    style="pointer-events: auto;" 
+                    fill="rgba(0, 255, 0, 0)"
+                    stroke="black"
+                    stroke-width="0"
+                    data-nombre="La Estrella: No contamos con tienda en este municipio."
+                    onmouseover="cambiarOpacidad('imgEstrella', 0.4), mostrarTooltip(event)"
+                    onmouseout="cambiarOpacidad('imgEstrella', 0.5), ocultarTooltip()"
+                    onmousemove="moverTooltip(event)">
+                </polygon>
+                </svg>
+
+                <div id="zonaEstrella" class="zona Estrella" style="position: absolute; z-index: 1;">
+                    <img id="imgEstrella" src="Img/Antioquia/11.png" style="display: none;position: absolute; width: 105%;top: -1%;left: -6%; opacity: 0.5 ;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="0.5">
+                </div>
+
+                <!--SABANETA-->
+                <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaSabaneta"
+                style="display: none; position: absolute;top: 66%;left: 28%;width: 4%;height: 11%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                <polygon points="10,10 68,5 90,50 85,65 90,85 85,102 48,90 35,70 5,48" 
+                    style="pointer-events: auto;" 
+                    fill="rgba(0, 255, 0, 0)"
+                    stroke="black"
+                    stroke-width="0"
+                    data-nombre="Sabaneta: No contamos con tienda en este municipio."
+                    onmouseover="cambiarOpacidad('imgSabaneta', 0.4), mostrarTooltip(event)"
+                    onmouseout="cambiarOpacidad('imgSabaneta', 0.5), ocultarTooltip()"
+                    onmousemove="moverTooltip(event)">
+                </polygon>
+                </svg>
+
+                <div id="zonaSabaneta" class="zona Sabaneta" style="position: absolute; z-index: 1;">
+                    <img id="imgSabaneta" src="Img/Antioquia/12.png" style="display: none;position: absolute; width: 105%;top: 0%;left: -6%; opacity: 0.5 ;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="0.5">
+                </div>
+
+                <!--ENVIGADO-->
+                <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaEnvigado"
+                style="display: none; position: absolute;top: 61%;left: 30%;width: 11%;height: 15%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                <polygon points="5,5 18,10 20,18 50,24 50,30 55,30 68,5 90,10 95,15 100,15 110,15 117,20 117,30 125,40 125,50 78,50 72,68 43,70 40,90 25,95 15,90 0,110 -18,90 -10,80 -15,60 -10,55 -20,40 -25,30" 
+                    style="pointer-events: auto;" 
+                    fill="rgba(0, 255, 0, 0)"
+                    stroke="black"
+                    stroke-width="0"
+                    data-nombre="Envigado"
+                    onclick="mostrarInfo(event, INFOENVIGADO); seleccionarZona('zonaEnvigado')"
+                    onmouseover="cambiarOpacidad('imgEnvigado', 0.5), cambiarColor('imgEnvigado', 'grayscale(0%)'); mostrarTooltip(event)"
+                    onmouseout="cambiarOpacidad('imgEnvigado', 1), cambiarColor('imgEnvigado', 'grayscale(80%)'); ocultarTooltip()"
+                    onmousemove="moverTooltip(event)">
+                </polygon>
+                </svg>
+
+                <div id="zonaEnvigado" class="zona Envigado" style="position: absolute; z-index: 1;">
+                    <img id="imgEnvigado" src="Img/Antioquia/13.png" style="display: none;position: absolute;width: 98%;top: -1%;left: -2%; opacity: 1 ;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="1">
+                </div>
+
+                <!--CALDAS-->
+                <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaCaldas"
+                style="display: none; position: absolute;top: 73%;left: 25%;width: 9%;height: 24%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                <polygon points="15,0 21,0 46,4 48,8 68,4 90,15 95,20 85,32 90,54 93,70 75,80 73,90 68,90 55,110 47,110 34,95 18,93 5,85 13,70 10,55 0,40 10,30" 
+                    style="pointer-events: auto;" 
+                    fill="rgba(0, 255, 0, 0)"
+                    stroke="black"
+                    stroke-width="0"
+                    data-nombre="Caldas: No contamos con tienda en este municipio."
+                    onmouseover="cambiarOpacidad('imgCaldas', 0.4), mostrarTooltip(event)"
+                    onmouseout="cambiarOpacidad('imgCaldas', 0.5), ocultarTooltip()"
+                    onmousemove="moverTooltip(event)">
+                </polygon>
+                </svg>
+
+                <div id="zonaCaldas" class="zona Caldas" style="position: absolute; z-index: 1;">
+                    <img id="imgCaldas" src="Img/Antioquia/14.png" style="display: none;position: absolute;width: 98%;top: 5%;left: -2%; opacity: 0.5 ;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="0.5">
+                </div>
+
+                <!--EL RETIRO-->
+                <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaRetiro"
+                style="display: none; position: absolute;top: 66.5%;left: 31.2%;width: 11.7%;height: 31%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                <polygon points="24,18 35,20 40,15 42,5 50,5 55,8 60,0 60,-5 72,-5 78,-6 85,-5 88,20 95,25 95,28 90,30 95,35 98,58 92,60 92,65 80,80 80,90 68,95 65,102 47,110 35,108 15,95 0,80 2,75 17,68 15,50 15,45 10,38" 
+                    style="pointer-events: auto;" 
+                    fill="rgba(0, 255, 0, 0)"
+                    stroke="black"
+                    stroke-width="0"
+                    data-nombre="El Retiro: No contamos con tienda en este municipio."
+                    onmouseover="cambiarOpacidad('imgRetiro', 0.4), mostrarTooltip(event)"
+                    onmouseout="cambiarOpacidad('imgRetiro', 0.5), ocultarTooltip()"
+                    onmousemove="moverTooltip(event)">
+                </polygon>
+                </svg>
+
+                <div id="zonaRetiro" class="zona Retiro" style="position: absolute; z-index: 1;">
+                    <img id="imgRetiro" src="Img/Antioquia/15.png" style="display: none;position: absolute;width: 100%;top: -1%;left: 1%; opacity: 0.5 ;z-index: 2;filter: none;"data-opacidad="0.5">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="info">
+            <p>i</p>
+        </div>
+        
+        <div id="info-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <p>
+                    Aquí encontrarás el <strong>mapa de Antioquia</strong> dividido por municipios.<br><br>
+                    Los <strong>municipios que tienen color</strong> son aquellos en los que <strong>Homecenter cuenta con una tienda</strong>.<br><br>
+                    Al dar clic en un municipio con color, podrás ver la <strong>información de la tienda</strong> correspondiente.<br><br>
+                    A la derecha verás una <strong>lista de municipios</strong>:<br>
+                    - <strong>Punto verde 🟢</strong>: contamos con tienda.<br>
+                    - <strong>Punto rojo 🔴</strong>: no contamos con tienda.<br><br>
+                    También puedes hacer clic en la lista para ver la información de la tienda que se encuentra en ese municipio.
+                </p>
+                
+            </div>
+        </div>
+
+    </div>
+
+
+    <div id="info-box" class="info-box"></div>
+
+    <div id="tooltip"></div>
+
+    <div class="Chatbot">
+        <p>Volver al chatbot</p>
+        <img src="Img/Franco_Idel.png" alt="Return" class="ChatFranco">
+    </div>
+
+    <div class="returnCol" id="return-button">
+        <p>Regresar</p>
+        <div class="btnReturn" id="arrow">
+            <p>⬅︎</p>
+        </div>
+    </div>
+    
+
+</body>
+</html>

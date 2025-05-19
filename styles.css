@@ -358,8 +358,8 @@ footer{
             bottom: calc(env(safe-area-inset-bottom));
         }
 
-        .card, .newCard{
-            margin-bottom: 10%;
+        .container {
+            transform: translateY(-10%);
         }
     }
 }

@@ -73,32 +73,6 @@ body {
     /*padding-right: 10px; */
 }
 
-.cardBogota {
-    background: #E7F0FE;
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden; 
-    transition: width 1s ease-in-out, height 1s ease-in-out;
-}
-
-.cardBogota.move-out {
-    transform: scale(0.8) translateY(100vh);
-    opacity: 0;
-}
-
-.cardBogota-content {
-    flex-grow: 1;
-    overflow: auto; 
-    /*padding-right: 10px; */
-}
-
-
 .btn {
     background: #0071CE;
     color: white;
@@ -382,6 +356,10 @@ footer{
         footer{
             padding: 6px 6px calc(6px + env(safe-area-inset-bottom)) 6px;
             bottom: calc(env(safe-area-inset-bottom));
+        }
+
+        .card, .newCard{
+            margin-bottom: 10%;
         }
     }
 }

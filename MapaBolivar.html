@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colombia</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles1.css">
+    <script src="script.js"></script>
+    <script src="script1.js"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/hmu6tii.css">
+</head>
+<body>
+
+    <div class="newcircle" style="bottom: 50%; height: 100%; width:150%; position: absolute; background: #3e91d4; border-radius: 50%; transition: all 1.5s ease-in-out; pointer-events: none; z-index: 0;"></div>
+    <div class="circle" style="bottom: -10%; height: 150%; width:300%;"></div>
+    
+    <div class="container">
+        <div class="newCard" style="width: 50% ;height: 60%;background: #E7F0FE; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); position: absolute; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; "></div>
+        <div class="card" style="width: 70%;">
+            
+            <div class="card-content">
+            <p class="tituloMap" style="z-index: 0;">
+                BOLÍVAR
+            </p>
+                <div class="map-container">
+                
+                    
+
+                    <div class="SecuenciaMapa" style="opacity: 1;position: relative;width: 80%; left: 10%;">
+                        <img id="secuenciaImagen" src="Img/Bolivar/Secuencia/MapaR_00034.png" alt="Mapa Interactivo" style="width: 100%;">
+                    </div>
+
+                    <div id="listaZonas" class="lista" style="height: 40%;">
+                        <div class="tituloLocalidades">Localidades</div>
+                        <div class="contenido-lista">
+                            <span class="zona-lista" data-zona="CaribeN">🟢 Histórica y del Caribe Norte</span>
+                            <span class="zona-lista2"> 🔴 Industrial y de la Bahía</span>
+                            <span class="zona-lista" data-zona="VirTur">🟢 Virgen y Turística</span>
+                        </div>
+                        
+                    </div>     
+                    
+                    <style>
+                        .card, .circle {
+                            opacity: 0;
+                            transition: opacity 1s ease;
+                        }
+                        .newcircle, .newCard {
+                            transition: all 1.5s ease-in-out, opacity 1s ease;
+                        }
+                        #secuenciaImagen {
+                            transition: opacity 1s ease;
+                        }
+
+                        
+                    </style>
+                    
+                    <script>
+
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const card = document.querySelector('.card');
+                        const circle = document.querySelector('.circle');
+
+                        const newCard = document.querySelector('.newCard');
+                        const newCircle = document.querySelector('.newcircle');
+
+                        if (card && circle) {
+                                // Calcular altura
+                                const cardHeight = card.scrollHeight;
+                                console.log("Altura actual de la tarjeta (cardHeight):", cardHeight, "px");
+
+                                // Aumentar opacidad para que aparezcan
+                                setTimeout(() => {
+                                    card.style.opacity = 1;
+                                    circle.style.opacity = 1;
+                                }, 1500); // pequeño retraso para asegurar que todo esté cargado
+
+                                if (newCard && newCircle) {
+                                    // Usamos el mismo cardHeight de 'card' para 'newCard'
+                                    console.log("Usando altura de card para animar newCard:", cardHeight, "px");
+
+                                    // Pequeño timeout para que se vea la aparición
+                                    setTimeout(() => {
+                                        // 1. Hacer visibles
+                                        newCard.style.opacity = "1";
+                                        newCircle.style.opacity = "1";
+
+                                        // 2. Animar propiedades
+                                        newCard.style.width = "70%";
+                                        newCard.style.height = `${cardHeight - 57}px`;
+
+                                        newCircle.style.width = "300%";
+                                        newCircle.style.height = "150%";
+                                        newCircle.style.bottom = "-10%";
+                                    }, 0); // pequeño retardo para que cargue todo
+
+                                }
+                            }
+                    });
+
+                    // Variable global para saber si la animación ya terminó
+                    window.animacionTerminada = false;
+
+                    window.reproducirAnimacion = function () {
+                        // Si ya terminó la animación, no la vuelvas a reproducir
+                        if (window.animacionTerminada) {
+                            return;
+                        }
+
+                        let imagenActual = 34;
+                        const imagenFinal = 120;
+                        const imagen = document.getElementById('secuenciaImagen');
+
+                        const numeroConCeros = imagenActual.toString().padStart(5, '0');
+                        imagen.src = `Img/Bolivar/Secuencia/MapaR_${numeroConCeros}.png`;
+
+                        clearInterval(window.intervaloAnimacion);
+
+                        // Ocultar elementos interactivos al inicio
+                        const areaInteractiva = document.querySelector('.area-interactiva');
+
+                        const zonaCaribeN = document.getElementById('zonaCaribeN');
+                        const imgCaribeN = document.getElementById('imgCaribeN');
+
+                        const zonaVirTur = document.getElementById('zonaVirTur');
+                        const imgVirTur = document.getElementById('imgVirTur');
+                        
+                        const zonaIndustrial = document.getElementById('zonaIndustrial');
+                        const imgIndustrial = document.getElementById('imgIndustrial');
+                        
+
+                        if (areaInteractiva) areaInteractiva.style.display = "none";
+
+                        if (zonaCaribeN) zonaCaribeN.style.display = "none";
+                        if (imgCaribeN) imgCaribeN.style.display = "none";
+
+                        if (zonaVirTur) zonaVirTur.style.display = "none";
+                        if (imgVirTur) imgVirTur.style.display = "none";
+                        
+                        if (zonaIndustrial) zonaIndustrial.style.display = "none";
+                        if (imgIndustrial) imgIndustrial.style.display = "none";
+
+
+                        setTimeout(() => {
+                            window.intervaloAnimacion = setInterval(() => {
+                                imagenActual++;
+                                if (imagenActual <= imagenFinal) {
+                                    const numeroConCeros = imagenActual.toString().padStart(5, '0');
+                                    imagen.src = `Img/Bolivar/Secuencia/MapaR_${numeroConCeros}.png`;
+                                } else {
+                                    clearInterval(window.intervaloAnimacion);
+                                    window.animacionTerminada = true; // Marcar como completada
+
+                                    setTimeout(() => {
+                                        imagen.style.opacity = "0";
+                                    }, 200);
+
+                                    // Mostrar elementos interactivos una vez termine la animación
+                                    if (areaInteractiva) areaInteractiva.style.display = "block";
+
+                                    if (zonaCaribeN) zonaCaribeN.style.display = "block";
+                                    if (imgCaribeN) imgCaribeN.style.display = "block";
+
+                                    if (zonaVirTur) zonaVirTur.style.display = "block";
+                                    if (imgVirTur) imgVirTur.style.display = "block";
+                                    
+                                    if (zonaIndustrial) zonaIndustrial.style.display = "block";
+                                    if (imgIndustrial) imgIndustrial.style.display = "block";
+
+                                }
+                            }, 100);
+                        }, 1000);
+                    };
+
+                    // Si ya se mostró el modal antes, iniciar animación directamente (solo una vez)
+                    if (sessionStorage.getItem("modalShownBogota")) {
+                        window.addEventListener("DOMContentLoaded", () => {
+                            if (document.getElementById('secuenciaImagen')) {
+                                setTimeout(() => {
+                                    window.reproducirAnimacion();
+                                }, 2000);
+                            }
+                        });
+                    }
+
+                    const INFOCARIBEN = `
+                        <h2>ZONA HISTÓRICA Y DEL CARIBE NORTE</h2>
+                        
+                        <div class="info-content">
+                            <div class="Barrio">
+                                <img src="Img/Tienda.png" alt="Tienda en Suba">
+                                <h6>ALMACEN CARTAGENA</h6>
+                            </div>
+                            <div class="info-text">
+                                <h3><strong>Dirección:</strong> <br>📍 Calle 29b # 22-127.</h3>
+                                <h3><strong>Teléfono: </strong><br>📞 018000127373.</h3>
+                                <h3><strong>Horario: </strong><br>📅 8 am - 10 pm.</h3>
+                            </div>
+                        </div>`;
+                    
+                        const INFOVIRTUR = `
+                        <h2>ZONA VIGEN Y TURÍSTICA</h2>
+                        
+                        <div class="info-content">
+                            <div class="Barrio">
+                                <img src="Img/Tienda.png" alt="Tienda en Suba">
+                                <h6>ALMACEN CARTAGENA2</h6>
+                            </div>
+                            <div class="info-text">
+                                <h3><strong>Dirección:</strong> <br>📍 Calle 31 #82-111.</h3>
+                                <h3><strong>Teléfono: </strong><br>📞 018000127373.</h3>
+                                <h3><strong>Horario: </strong><br>📅 8 am - 9 pm.</h3>
+                            </div>
+                        </div>`;
+                        
+                        const ZONAS_INFO = {
+                            CaribeN: INFOCARIBEN,
+                            VirTur: INFOVIRTUR
+                        };
+
+                        const MAPEO_ZONAS = {
+                            "CARIBEN": "CaribeN",
+                            "VIRTUR": "VirTur"
+                        };
+                    </script>
+
+                    <!--CARIBE NORTE-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaCaribeN"
+                    style="display: none; position: absolute;top: 0%;left: 40%;width: 23%;height: 60%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                    <polygon points="5,50 5,43 37,20 58,-7 69,-5 63,5 60,13 52,20 53,28 51,30 45,24 42,24 37,36 32,40 32,51 27,51 26,63 19,65 15,77 20,79 30,82 50,85 55,87 58,92 68,91 76,88 90,77 95,97 84,99 70,103 58,105 45,101 40,108 37,101 33,98 17,92 3,84 8,80 11,72 20,62 21,54 18,52" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Riomar"
+                        onclick="mostrarInfo(event, INFOCARIBEN); seleccionarZona('zonaCaribeN')"
+                        onmouseover="cambiarOpacidad('imgCaribeN', 0.5), cambiarColor('imgCaribeN', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgCaribeN', 1), cambiarColor('imgCaribeN', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaCaribeN" class="zona CaribeN" style="position: absolute; z-index: 1;">
+                        <img id="imgCaribeN" src="Img/Bolivar/1.png" style="display: none;position: absolute; top: 2.1%;left: 4.5%;width: 98.1%; opacity: 1;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="1">
+                    </div>
+
+                    <!--INDUSTRIAL-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaIndustrial"
+                    style="display: none; position: absolute; top: 29%; left: 29%; width: 26%; height: 70%; z-index: 3; pointer-events: none;">
+                    <polygon points="14,11 25,2 40,-5 46,-10 48,-4 60,-3 63,0 62,8 56,18 55,22 52,26 60,31 76,33 73,40 75,44 73,46 74,54 77,57 75,65 80,67 91,85 90,93 98,110 67,110 67,104 60,99 58,95 60,91 64,97 64,82 66,73 62,62 58,58 48,57 50,63 34,47 36,46 38,49 44,44 47,45 45,41 49,42 48,35 40,36 25,25 26,20 29,17 28,15 26,19 24,20 19,17 24,25 15,43 27,49 25,52 6,43 10,47 8,48 1,42 15,30 17,25" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Industrial y de la Bahía: No contamos con tienda en esta localidad."
+                        onmouseover="cambiarOpacidad('imgIndustrial', 0.4), mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgIndustrial', 0.5), ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaIndustrial" class="zona Industrial" style="position: absolute; z-index: 1;">
+                        <img id="imgIndustrial" src="Img/Bolivar/2.png" style="display: none;position: absolute; width: 95.5%; top: 0.5%; left: 1.6%;opacity: 0.5;z-index: 2;filter: none;"data-opacidad="0.5">
+                    </div>
+
+                    <!--VIRGEN Y TURISTICA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaVirTur"
+                    style="display: none; position: absolute;top: 48%;left: 47.5%;width: 19%;height: 43.5%; z-index: 3; pointer-events: none;">
+                    <polygon points="7,15 15,17 21,26 25,17 35,19 50,17 76,7 81,5 95,-1 100,3 91,10 77,16 78,23 75,25 74,20 60,24 62,28 60,30 62,34 66,34 65,38 70,41 75,35 80,34 88,40 81,51 63,67 28,103 27,100 28,84 14,62 5,57 8,50 8,45 5,42 3,31 5,28 3,24" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="VirTur"
+                        onclick="mostrarInfo(event, INFOVIRTUR); seleccionarZona('zonaVirTur')"
+                        onmouseover="cambiarOpacidad('imgVirTur', 0.5), cambiarColor('imgVirTur', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgVirTur', 1), cambiarColor('imgVirTur', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaVirTur" class="zona VirTur" style="position: absolute; z-index: 1;">
+                        <img id="imgVirTur" src="Img/Bolivar/3.png" style="display: none;position: absolute; top: 5%; left: 1%; width: 99%; opacity: 1;z-index: 2;filter: none;"data-opacidad="1">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="info">
+                <p>i</p>
+            </div>
+            
+            <div id="info-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <p>
+                        Aquí encontrarás el <strong>mapa de Bolivar</strong> dividido por localidades.<br><br>
+                        Las <strong>localidades que tienen color</strong> son aquellas en las que <strong>Homecenter cuenta con una tienda</strong>.<br><br>
+                        Al dar clic en una localidad con color, podrás ver la <strong>información de la tienda</strong> correspondiente.<br><br>
+                        A la derecha verás una <strong>lista de localidades</strong>:<br>
+                        - <strong>Punto verde 🟢</strong>: contamos con tienda.<br>
+                        - <strong>Punto rojo 🔴</strong>: no contamos con tienda.<br><br>
+                        También puedes hacer clic en la lista para ver la información de la tienda que se encuentra en esa localidad.
+                    </p>
+                    
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="info-box" class="info-box"></div>
+
+        <div id="tooltip"></div>
+
+    </div>
+
+    <footer>
+        <div class="Chatbot">
+            <p>Volver al chatbot</p>
+            <img src="Img/Franco_Idel.png" alt="Return" class="ChatFranco">
+        </div>
+
+        <div class="returnCol" id="return-button">
+            <p>Regresar</p>
+            <div class="btnReturn" id="arrow">
+                <p>⬅︎</p>
+            </div>
+        </div>
+    </footer>
+    
+
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colombia</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles1.css">
+    <script src="script.js"></script>
+    <script src="script1.js"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/hmu6tii.css">
+</head>
+<body>
+
+    <div class="newcircle" style="bottom: 50%; height: 100%; width:150%; position: absolute; background: #3e91d4; border-radius: 50%; transition: all 1.5s ease-in-out; pointer-events: none; z-index: 0;"></div>
+    <div class="circle" style="bottom: -10%; height: 150%; width:300%;"></div>
+    
+    <div class="container">
+        <div class="newCard" style="width: 50% ;height: 60%;background: #E7F0FE; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); position: absolute; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; "></div>
+        <div class="card" style="width: 70%;">
+
+            <div class="card-content">
+            <p class="tituloMap" style="z-index: 0;">
+                ATLÁNTICO
+            </p>
+                <div class="map-container">
+                
+                    
+
+                    <div class="SecuenciaMapa" style="opacity: 1;position: relative;width: 80%; left: 10%;">
+                        <img id="secuenciaImagen" src="Img/Atlantico/Secuencia/MapaR_00034.png" alt="Mapa Interactivo" style="width: 100%;">
+                    </div>
+
+                    <div id="listaZonas" class="lista" style="height: 40%;">
+                        <div class="tituloLocalidades">Localidades</div>
+                        <div class="contenido-lista">
+                            <span class="zona-lista" data-zona="Riomar">🟢 Riomar</span>
+                            <span class="zona-lista" data-zona="Norte">🟢 Norte-Centro Histórico</span>
+                            <span class="zona-lista2"> 🔴 Suroccidente</span>
+                            <span class="zona-lista2">🔴 Metropolitana</span>
+                            <span class="zona-lista" data-zona="Suroriente">🟢 Suroriente</span>
+                        </div>
+                        
+                    </div>     
+                    
+                    <style>
+                        .card, .circle {
+                            opacity: 0;
+                            transition: opacity 1s ease;
+                        }
+                        .newcircle, .newCard {
+                            transition: all 1.5s ease-in-out, opacity 1s ease;
+                        }
+                        #secuenciaImagen {
+                            transition: opacity 1s ease;
+                        }
+
+                        
+                    </style>
+                    
+                    <script>
+
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const card = document.querySelector('.card');
+                        const circle = document.querySelector('.circle');
+
+                        const newCard = document.querySelector('.newCard');
+                        const newCircle = document.querySelector('.newcircle');
+
+                        if (card && circle) {
+                                // Calcular altura
+                                const cardHeight = card.scrollHeight;
+                                console.log("Altura actual de la tarjeta (cardHeight):", cardHeight, "px");
+
+                                // Aumentar opacidad para que aparezcan
+                                setTimeout(() => {
+                                    card.style.opacity = 1;
+                                    circle.style.opacity = 1;
+                                }, 1500); // pequeño retraso para asegurar que todo esté cargado
+
+                                if (newCard && newCircle) {
+                                    // Usamos el mismo cardHeight de 'card' para 'newCard'
+                                    console.log("Usando altura de card para animar newCard:", cardHeight, "px");
+
+                                    // Pequeño timeout para que se vea la aparición
+                                    setTimeout(() => {
+                                        // 1. Hacer visibles
+                                        newCard.style.opacity = "1";
+                                        newCircle.style.opacity = "1";
+
+                                        // 2. Animar propiedades
+                                        newCard.style.width = "70%";
+                                        newCard.style.height = `${cardHeight - 57}px`;
+
+                                        newCircle.style.width = "300%";
+                                        newCircle.style.height = "150%";
+                                        newCircle.style.bottom = "-10%";
+                                    }, 0); // pequeño retardo para que cargue todo
+
+                                }
+                            }
+                    });
+
+                    // Variable global para saber si la animación ya terminó
+                    window.animacionTerminada = false;
+
+                    window.reproducirAnimacion = function () {
+                        // Si ya terminó la animación, no la vuelvas a reproducir
+                        if (window.animacionTerminada) {
+                            return;
+                        }
+
+                        let imagenActual = 34;
+                        const imagenFinal = 120;
+                        const imagen = document.getElementById('secuenciaImagen');
+
+                        const numeroConCeros = imagenActual.toString().padStart(5, '0');
+                        imagen.src = `Img/Atlantico/Secuencia/MapaR_${numeroConCeros}.png`;
+
+                        clearInterval(window.intervaloAnimacion);
+
+                        // Ocultar elementos interactivos al inicio
+                        const areaInteractiva = document.querySelector('.area-interactiva');
+
+                        const zonaRiomar = document.getElementById('zonaRiomar');
+                        const imgRiomar = document.getElementById('imgRiomar');
+
+                        const zonaNorte = document.getElementById('zonaNorte');
+                        const imgNorte = document.getElementById('imgNorte');
+
+                        const zonaSuroccidente = document.getElementById('zonaSuroccidente');
+                        const imgSuroccidente = document.getElementById('imgSuroccidente');
+
+                        const zonaMetropolitana = document.getElementById('zonaMetropolitana');
+                        const imgMetropolitana = document.getElementById('imgMetropolitana');
+
+                        const zonaSuroriente = document.getElementById('zonaSuroriente');
+                        const imgSuroriente = document.getElementById('imgSuroriente');
+
+                        
+
+                        if (areaInteractiva) areaInteractiva.style.display = "none";
+
+                        if (zonaRiomar) zonaRiomar.style.display = "none";
+                        if (imgRiomar) imgRiomar.style.display = "none";
+
+                        if (zonaNorte) zonaNorte.style.display = "none";
+                        if (imgNorte) imgNorte.style.display = "none";
+
+                        if (zonaSuroccidente) zonaSuroccidente.style.display = "none";
+                        if (imgSuroccidente) imgSuroccidente.style.display = "none";
+
+                        if (zonaMetropolitana) zonaMetropolitana.style.display = "none";
+                        if (imgMetropolitana) imgMetropolitana.style.display = "none";
+
+                        if (zonaSuroriente) zonaSuroriente.style.display = "none";
+                        if (imgSuroriente) imgSuroriente.style.display = "none";
+
+
+                        setTimeout(() => {
+                            window.intervaloAnimacion = setInterval(() => {
+                                imagenActual++;
+                                if (imagenActual <= imagenFinal) {
+                                    const numeroConCeros = imagenActual.toString().padStart(5, '0');
+                                    imagen.src = `Img/Atlantico/Secuencia/MapaR_${numeroConCeros}.png`;
+                                } else {
+                                    clearInterval(window.intervaloAnimacion);
+                                    window.animacionTerminada = true; // Marcar como completada
+
+                                    setTimeout(() => {
+                                        imagen.style.opacity = "0";
+                                    }, 200);
+
+                                    // Mostrar elementos interactivos una vez termine la animación
+                                    if (areaInteractiva) areaInteractiva.style.display = "block";
+
+                                    if (zonaRiomar) zonaRiomar.style.display = "block";
+                                    if (imgRiomar) imgRiomar.style.display = "block";
+
+                                    if (zonaNorte) zonaNorte.style.display = "block";
+                                    if (imgNorte) imgNorte.style.display = "block";
+
+                                    if (zonaSuroccidente) zonaSuroccidente.style.display = "block";
+                                    if (imgSuroccidente) imgSuroccidente.style.display = "block";
+
+                                    if (zonaMetropolitana) zonaMetropolitana.style.display = "block";
+                                    if (imgMetropolitana) imgMetropolitana.style.display = "block";
+
+                                    if (zonaSuroriente) zonaSuroriente.style.display = "block";
+                                    if (imgSuroriente) imgSuroriente.style.display = "block";
+
+                                }
+                            }, 50);
+                        }, 1000);
+                    };
+
+                    // Si ya se mostró el modal antes, iniciar animación directamente (solo una vez)
+                    if (sessionStorage.getItem("modalShownBogota")) {
+                        window.addEventListener("DOMContentLoaded", () => {
+                            if (document.getElementById('secuenciaImagen')) {
+                                setTimeout(() => {
+                                    window.reproducirAnimacion();
+                                }, 2000);
+                            }
+                        });
+                    }
+
+                    const INFORIOMAR = `
+                        <h2>ZONA RIOMAR</h2>
+                        
+                        <div class="info-content">
+                            <div class="Barrio">
+                                <img src="Img/Tienda.png" alt="Tienda en Suba">
+                                <h6>ALMACEN BARRANQUILLA</h6>
+                            </div>
+                            <div class="info-text">
+                                <h3><strong>Dirección:</strong> <br>📍 Carrera 53 # 98 - 2.</h3>
+                                <h3><strong>Teléfono: </strong><br>📞 018000127373.</h3>
+                                <h3><strong>Horario: </strong><br>📅 8 am - 9 pm.</h3>
+                            </div>
+                        </div>`;
+                    
+                        const INFONORTE = `
+                        <h2>ZONA NORTE</h2>
+                        
+                        <div class="info-content">
+                            <div class="Barrio">
+                                <img src="Img/Tienda.png" alt="Tienda en Suba">
+                                <h6>ALMACEN BARRANQUILLA CENTRO</h6>
+                            </div>
+                            <div class="info-text">
+                                <h3><strong>Dirección:</strong> <br>📍 Carrera 46 # 48 - 50.</h3>
+                                <h3><strong>Teléfono: </strong><br>📞 018000127373.</h3>
+                                <h3><strong>Horario: </strong><br>📅 8 am - 8 pm.</h3>
+                            </div>
+                        </div>`;
+
+                        const INFOSUR = `
+                        <h2>ZONA SURORIENTE</h2>
+                        
+                        <div class="info-content">
+                            <div class="Barrio">
+                                <img src="Img/Tienda.png" alt="Tienda en Suba">
+                                <h6>ALMACEN BARRANQUILLA SUR</h6>
+                            </div>
+                            <div class="info-text">
+                                <h3><strong>Dirección:</strong> <br>📍 Carrera 10 # 27b - 211.</h3>
+                                <h3><strong>Teléfono: </strong><br>📞 018000127373.</h3>
+                                <h3><strong>Horario: </strong><br>📅 8 am - 8 pm.</h3>
+                            </div>
+                        </div>`;
+                        
+                        const ZONAS_INFO = {
+                            Riomar: INFORIOMAR,
+                            Norte: INFONORTE,
+                            Suroriente: INFOSUR
+                        };
+
+                        const MAPEO_ZONAS = {
+                            "RIOMAR": "Riomar",
+                            "NORTE": "Norte",
+                            "SUR": "Suroriente"
+                        };
+                    </script>
+
+                    <!--RIOMAR-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaRiomar"
+                    style="display: none; position: absolute;top: 2%;left: 33%;width: 22%;height: 47%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                    <polygon points="6,35 15,18 38,10 43,10 52,3 73,38 78,40 100,65 100,69 95,71 92,88 87,88 84,99 56,75 46,73 60,50 69,43 67,40 60,43 58,38 65,36 64,32 58,32 57,20 51,8 45,13 35,13 33,18 31,18 31,14 20,20 18,28 27,38 31,38 35,43 41,41 41,37 47,37 45,40 40,45 48,45 53,45 57,42 60,43 55,46 40,48 28,44 13,55" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Riomar"
+                        onclick="mostrarInfo(event, INFORIOMAR); seleccionarZona('zonaRiomar')"
+                        onmouseover="cambiarOpacidad('imgRiomar', 0.5), cambiarColor('imgRiomar', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgRiomar', 1), cambiarColor('imgRiomar', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaRiomar" class="zona Riomar" style="position: absolute; z-index: 1;">
+                        <img id="imgRiomar" src="Img/Atlantico/1.png" style="display: none;position: absolute; top: 4%;left: 5%; width: 97%; opacity: 1;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="1">
+                    </div>
+
+                    <!--NORTE-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaNorte"
+                    style="display: none; position: absolute;top: 30%;left: 34.3%;width: 30%;height: 35.5%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                    <polygon points="-15,0 11,2 20,12 35,15 71,46 76,33 81,32 86,10 90,11 95,7 99,9 130,54 139,80 141,91 126,88 127,92 124,96 110,91 98,83 98,81 95,80 90,78 87,75 80,72 70,72 67,70 65,68 57,67 53,65 45,65 40,65 35,62 28,65 23,65 21,67 -12,74 -14,72 -30,77 -32,80 -38,78 -13,53 -8,52 -12,51 -6,40 3,45 5,37 -33,17" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Norte"
+                        onclick="mostrarInfo(event, INFONORTE); seleccionarZona('zonaNorte')"
+                        onmouseover="cambiarOpacidad('imgNorte', 0.5), cambiarColor('imgNorte', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgNorte', 1), cambiarColor('imgNorte', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaNorte" class="zona Norte" style="position: absolute; z-index: 1;">
+                        <img id="imgNorte" src="Img/Atlantico/2.png" style="display: none;position: absolute; top: -1%;left: 3%;width: 99%; opacity: 1;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="1">
+                    </div>
+
+                    <!--SUROCCIDENTE-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaSuroccidente"
+                    style="display: none; position: absolute; top: 52%; left: 35.5%; width: 23%; height: 25%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                    <polygon points="-48,30 -37,30 -31,25 -11,20 -9,21 40,11 42,8 45,10 58,3 67,8 82,7 91,10 98,10 105,15 110,20 120,17 125,17 130,19 140,30 150,32 146,48 127,52 117,58 107,74 105,80 97,85 80,87 67,93 50,93 35,87 10,100 -2,97 -3,88 12,85 10,70 12,50 -5,48 -22,57 -40,57" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Suroccidente: No contamos con tienda en este municipio."
+                        onmouseover="cambiarOpacidad('imgSuroccidente', 0.4), mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgSuroccidente', 0.5), ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaSuroccidente" class="zona Suroccidente" style="position: absolute; z-index: 1;">
+                        <img id="imgSuroccidente" src="Img/Atlantico/3.png" style="display: none;position: absolute; width: 97.5%;top: -2%;left: 0%;opacity: 0.5;transform: rotate(9deg);z-index: 2;filter: none;"data-opacidad="0.5">
+                    </div>
+
+                    <!--METROPOLITANA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaMetropolitana"
+                    style="display: none; position: absolute; top: 63%; left: 41.5%; width: 17%; height: 32%; transform: rotate(-9deg); z-index: 3; pointer-events: none;">
+                    <polygon points="-8,48, 0,43 2,40 6,40 25,30 38,35 50,35 60,30 67,28 71,30 75,28 77,27 80,24 80,20 87,10 92,7 95,3 100,3 105,0 108,1 100,20 85,40 77,91 60,90 50,85 25,100 15,97 12,88 5,84 7,75 -2,68" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Metropolitana: No contamos con tienda en este municipio."
+                        onmouseover="cambiarOpacidad('imgMetropolitana', 0.4), mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgMetropolitana', 0.5), ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaMetropolitana" class="zona Metropolitana" style="position: absolute; z-index: 1;">
+                        <img id="imgMetropolitana" src="Img/Atlantico/4.png" style="display: none;position: absolute;width: 93%;top: -8%;left: -0.5%;opacity: 0.5;z-index: 2;filter: none;"data-opacidad="0.5">
+                    </div>
+
+                    <!--SURORIENTE-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaSuroriente"
+                    style="display: none; position: absolute;top: 55%;left: 54.5%;width: 11%;height: 37%; transform: rotate(9deg); z-index: 3; pointer-events: none;">
+                    <polygon points="20,-15 50,-8 65,-10 62,-20 84,-25 98,60 65,65 55,96 48,84 29,100 13,128 2,60 12,30" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Suroriente"
+                        onclick="mostrarInfo(event, INFOSUR); seleccionarZona('zonaSuroriente')"
+                        onmouseover="cambiarOpacidad('imgSuroriente', 0.5), cambiarColor('imgSuroriente', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgSuroriente', 1), cambiarColor('imgSuroriente', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaSuroriente" class="zona Suroriente" style="position: absolute; z-index: 1;">
+                        <img id="imgSuroriente" src="Img/Atlantico/5.png" style="display: none;position: absolute; top: 2%;left: -2%;width: 98%; opacity: 1;transform: rotate(-9deg);z-index: 2;filter: none;"data-opacidad="1">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="info">
+                <p>i</p>
+            </div>
+            
+            <div id="info-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <p>
+                        Aquí encontrarás el <strong>mapa de Antlántico</strong> dividido por localidades.<br><br>
+                        Las <strong>localidades que tienen color</strong> son aquellas en las que <strong>Homecenter cuenta con una tienda</strong>.<br><br>
+                        Al dar clic en una localidad con color, podrás ver la <strong>información de la tienda</strong> correspondiente.<br><br>
+                        A la derecha verás una <strong>lista de localidades</strong>:<br>
+                        - <strong>Punto verde 🟢</strong>: contamos con tienda.<br>
+                        - <strong>Punto rojo 🔴</strong>: no contamos con tienda.<br><br>
+                        También puedes hacer clic en la lista para ver la información de la tienda que se encuentra en esa localidad.
+                    </p>
+                    
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="info-box" class="info-box"></div>
+
+        <div id="tooltip"></div>
+
+    </div>
+
+    <footer>
+        <div class="Chatbot">
+            <p>Volver al chatbot</p>
+            <img src="Img/Franco_Idel.png" alt="Return" class="ChatFranco">
+        </div>
+
+        <div class="returnCol" id="return-button">
+            <p>Regresar</p>
+            <div class="btnReturn" id="arrow">
+                <p>⬅︎</p>
+            </div>
+        </div>
+    </footer>
+    
+
+</body>
+</html>

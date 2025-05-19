@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colombia</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles1.css">
+    <script src="script.js"></script>
+    <script src="script1.js"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/hmu6tii.css">
+</head>
+<body>
+
+    <div class="newcircle" style="bottom: 50%; height: 100%; width:150%; position: absolute; background: #3e91d4; border-radius: 50%; transition: all 1.5s ease-in-out; pointer-events: none; z-index: 0;"></div>
+    <div class="circle" style="bottom: -10%; height: 150%; width:300%;"></div>
+    
+    <div class="container">
+        <div class="newCard" style="width: 50% ;height: 60%;background: #E7F0FE; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); position: absolute; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; "></div>
+        <div class="card" style="width: 70%;">
+            
+            <div class="card-content">
+            <p class="tituloMap">
+                BOGOTÁ
+            </p>
+                <div class="map-container">
+                
+                    <div class="mapa" style="opacity: 0;"><img src="Img/Mapa.png" alt="Mapa Interactivo"></div>
+
+                    <div id="listaZonas" class="lista">
+                        <div class="tituloLocalidades">Localidades</div>
+                        <div class="contenido-lista">
+                            <span class="zona-lista" data-zona="Usaquen">🟢 Usaquén</span>
+                            <span class="zona-lista" data-zona="Suba">🟢 Suba</span>
+                            <span class="zona-lista2"> 🔴 Chapinero</span>
+                            <span class="zona-lista2">🔴 Barrios Unidos</span>
+                            <span class="zona-lista" data-zona="Engativa">🟢 Engativá</span>
+                            <span class="zona-lista" data-zona="Fontibon">🟢 Fontibón</span>
+                            <span class="zona-lista2">🔴 Teusaquillo</span>
+                            <span class="zona-lista2" >🔴 Santa Fe</span>
+                            <span class="zona-lista2" >🔴 La Candelaria</span>
+                            <span class="zona-lista" data-zona="Martires">🟢 Los Mártires</span>
+                            <span class="zona-lista" >🔴 Puente Aranda</span>
+                            <span class="zona-lista" data-zona="Kennedy">🟢 Kennedy</span>
+                            <span class="zona-lista2" data-zona="Bosa">🔴 Bosa</span>
+                            <span class="zona-lista2" >🔴 San Cristóbal</span>
+                            <span class="zona-lista2" >🔴 Antonio Nariño</span>
+                            <span class="zona-lista2" >🔴 Rafael Uribe Uribe</span>
+                            <span class="zona-lista2" >🔴 Tunjuelito</span>
+                            <span class="zona-lista2" >🔴 Ciudad Bolívar</span>
+                            <span class="zona-lista2">🔴 Usme</span>
+                            <span class="zona-lista2" >🔴 Sumapaz</span>
+                        </div>
+                        
+                    </div>
+                    
+                    <style>
+                        .card, .circle {
+                            opacity: 0;
+                            transition: opacity 1s ease;
+                        }
+                        .newcircle, .newCard {
+                            transition: all 1.5s ease-in-out, opacity 1s ease;
+                        }
+                    </style>
+                    
+                    <script>
+                        
+                        window.addEventListener("DOMContentLoaded", () => {
+                            const card = document.querySelector('.card');
+                            const circle = document.querySelector('.circle');
+
+                            const newCard = document.querySelector('.newCard');
+                            const newCircle = document.querySelector('.newcircle');
+
+                            if (card && circle) {
+                                // Calcular altura
+                                const cardHeight = card.scrollHeight;
+                                console.log("Altura actual de la tarjeta (cardHeight):", cardHeight, "px");
+
+                                // Aumentar opacidad para que aparezcan
+                                setTimeout(() => {
+                                    card.style.opacity = 1;
+                                    circle.style.opacity = 1;
+                                }, 1500); // pequeño retraso para asegurar que todo esté cargado
+
+                                if (newCard && newCircle) {
+                                    // Usamos el mismo cardHeight de 'card' para 'newCard'
+                                    console.log("Usando altura de card para animar newCard:", cardHeight, "px");
+
+                                    // Pequeño timeout para que se vea la aparición
+                                    setTimeout(() => {
+                                        // 1. Hacer visibles
+                                        newCard.style.opacity = "1";
+                                        newCircle.style.opacity = "1";
+
+                                        // 2. Animar propiedades
+                                        newCard.style.width = "70%";
+                                        newCard.style.height = `${cardHeight - 57}px`;
+
+                                        newCircle.style.width = "300%";
+                                        newCircle.style.height = "150%";
+                                        newCircle.style.bottom = "-10%";
+                                    }, 0); // pequeño retardo para que cargue todo
+
+                                }
+                            }
+                        });
+
+                        
+                        const INFOUSAQUEN = `<h2>ZONA USAQUÉN</h2>
+                        <div class="info-content">
+                            <div class="tiendas">
+                                <div class="imgtienda">
+                                    <div class="Barrio">
+                                        <img src="Img/Tienda.png" alt="Tienda en Martires">
+                                        <h4>ALMACEN CEDRITOS</h2>
+                                    </div>
+                                    <div class="info-text2">
+                                        <h5><strong>Dirección: </strong><br>📍 Avenida carrera 9 # 152a - 23.</h5>
+                                        <h5><strong>Teléfono: </strong><br>📞 018000127373.</h5>
+                                        <h5><strong>Horario: </strong><br>📅 7 am - 9 pm.</h5>
+                                    </div>
+                                </div>
+                                
+                                <div class="line"></div>
+
+                                <div class="imgtienda">
+                                    <div class="Barrio">
+                                        <img src="Img/Tienda.png" alt="Tienda en Martires">
+                                        <h4>ALMACEN NORTE</h2>
+                                    </div>
+                                    <div class="info-text2">
+                                        <h5><strong>Dirección: </strong><br>📍 Autopista Nte. # 175 - 50.</h5>
+                                        <h5><strong>Teléfono: </strong><br>📞 3208899933.</h5>
+                                        <h5><strong>Horario: </strong><br>📅 7 am - 9 pm.</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                        const INFOSUBA = `
+                        <h2>ZONA SUBA</h2>
+                        
+                        <div class="info-content">
+                            <div class="Barrio">
+                                <img src="Img/Tienda.png" alt="Tienda en Suba">
+                                <h6>ALMACEN SUBA</h6>
+                            </div>
+                            <div class="info-text">
+                                <h3><strong>Dirección:</strong> <br>📍 Avenida Carrera 104 # 148-07 Centro Comercial Plaza Imperial, Local 1-52.</h3>
+                                <h3><strong>Teléfono: </strong><br>📞 018000115150.</h3>
+                                <h3><strong>Horario: </strong><br>📅 8 am - 9 pm.</h3>
+                            </div>
+                        </div>`;
+                        const INFOENGATIVA = `
+                        <h2>ENGATIVÁ</h2>
+                        <div class="info-content">
+                            <div class="Barrio">
+                                <img src="Img/Tienda.png" alt="Tienda en Suba">
+                                <h6>ALMACEN CALLE 80</h6>
+                            </div>
+                            <div class="info-text">
+                                <h3><strong>Dirección: </strong><br>📍 Avenida carrera 68 # 80-77.</h3>
+                                <h3><strong>Teléfono: </strong><br>📞 018000127373.</h3>
+                                <h3><strong>Horario: </strong><br>📅 7 am - 9 pm.</h3>
+                            </div>
+                        </div>`;
+                        const INFOFONTIBON = `
+                        <h2>FONTIBÓN</h2>
+                        
+                        <div class="info-content">
+                            <div class="Barrio">
+                                <img src="Img/Tienda.png" alt="Tienda en Martires">
+                                <h6>ALMACEN DORADO</h6>
+                            </div>
+                            <div class="info-text">
+                                <h3><strong>Dirección: </strong><br>📍 Calle 50 # 82 - 55.</h3>
+                                <h3><strong>Teléfono: </strong><br>📞 018000127373.</h3>
+                                <h3><strong>Horario: </strong><br>📅 8 am - 8:30 pm.</h3>
+                            </div>
+                        </div>`;
+                        const INFOMARTIRES= `
+                        <h2>ZONA MÁRTIRES</h2>
+                        
+                        <div class="info-content">
+                            <div class="Barrio">
+                                <img src="Img/Tienda.png" alt="Tienda en Martires">
+                                <h6>ALMACEN MALLPLAZA NQS</h6>
+                            </div>
+                            <div class="info-text">
+                                <h3><strong>Dirección: </strong><br>📍 Calle 19 # 28 - 80.</h3>
+                                <h3><strong>Teléfono: </strong><br>📞 018000127373.</h3>
+                                <h3><strong>Horario: </strong><br>📅 8 am - 9 pm.</h3>
+                            </div>
+                        </div>`;
+                        const INFOKENNEDY= `
+                        <h2>ZONA KENNEDY</h2>
+                        <div class="info-content">
+                            <div class="tiendas">
+                                <div class="imgtienda">
+                                    <div class="Barrio">
+                                        <img src="Img/Tienda.png" alt="Tienda en Kennedy">
+                                        <h4>ALMACEN SUR</h4>
+                                    </div>
+                                    <div class="info-text2">
+                                        <h5><strong>Dirección: </strong><br>📍 Carrera 68 # 37-37 Sur.</h5>
+                                        <h5><strong>Teléfono: </strong><br>📞 018000127373.</h5>
+                                        <h5><strong>Horario: </strong><br>📅 8 am - 8 pm.</h5>
+                                    </div>
+                                </div>
+                                    
+                                <div class="line"></div>
+
+                                <div class="imgtienda">
+                                    <div class="Barrio">
+                                        <img src="Img/Tienda.png" alt="Tienda en Kennedy">
+                                        <h4>ALMACEN TINTAL</h4>
+                                    </div>
+                                    <div class="info-text2">
+                                        <h5><strong>Dirección: </strong><br>📍 Calle 10b # 86 - 50.</h5>
+                                        <h5><strong>Teléfono: </strong><br>📞 018000127373.</h5>
+                                        <h5><strong>Horario: </strong><br>📅 8 am - 9 pm.</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                        
+                        const ZONAS_INFO = {
+                            Usaquen: INFOUSAQUEN,
+                            Suba: INFOSUBA,
+                            Engativa: INFOENGATIVA,
+                            Fontibon: INFOFONTIBON,
+                            Martires: INFOMARTIRES,
+                            Kennedy: INFOKENNEDY
+                        };
+
+                        const MAPEO_ZONAS = {
+                            "USAQUÉN": "Usaquen",
+                            "SUBA": "Suba",
+                            "CHAPINERO": "Chapinero",
+                            "BARRIOS UNIDOS": "BarriosUnidos",
+                            "ENGATIVÁ": "Engativa",
+                            "FONTIBÓN": "Fontibon",
+                            "TEUSAQUILLO": "Teusaquillo",
+                            "SANTA FE": "Santafe",
+                            "CANDELARIA": "Candelaria",
+                            "MÁRTIRES": "Martires",
+                            "PUENTE ARANDA": "PuenteA",
+                            "KENNEDY": "Kennedy",
+                            "BOSA": "Bosa",
+                            "SAN CRISTOBAL": "SanCristobal",
+                            "ANTONIO NARIÑO": "AntonioN",
+                            "RAFAEL URIBE": "RafaelU",
+                            "TUNJUELITO": "Tunjuelito",
+                            "CIUDAD BOLIVAR": "CiudadB",
+                            "USME": "Usme",
+                            "SUMPAPAZ": "Sumapaz"
+                        };
+
+                    </script>
+
+                    <!--USAQUEN-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute; top: 1%; left: 5%; width: 28%; height: 25%; transform: rotate(9deg); z-index: 3; pointer-events: none;">
+                    <polygon points="-65,55 -45,45 -15,60 170,10 145,100 -65,100" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Usaquén"
+                        onclick="mostrarInfo(event, INFOUSAQUEN); seleccionarZona('zonaUsaquen');"
+                        onmouseover="cambiarOpacidad('imgUsaquen', 0.5), cambiarColor('imgUsaquen', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgUsaquen', 1), cambiarColor('imgUsaquen', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaUsaquen" class="zona Usaquen" style="position: absolute; z-index: 1;">
+                        <img id="imgUsaquen" src="Img/Bogotá/1.png" style="position: absolute; top: 13%; left: 2.4%; opacity: 1; transform: rotate(-9deg); z-index: 2;"data-opacidad="1">
+                    </div>
+                    
+                    <!--SUBA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 25%; left: 2.5%; width: 27%; height: 30%; transform: rotate(10deg); z-index: 3; pointer-events: none;">
+                    <polygon points=" -40,0 140,0 140,20 140,30 120,45 100,65 85,90 90,100 10,80 -10,55 -22,68 -38,68 -45,55" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Suba"
+                        onclick="mostrarInfo(event, INFOSUBA); seleccionarZona('zonaSuba')"
+                        onmouseover="cambiarOpacidad('imgSuba', 0.5), cambiarColor('imgSuba', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgSuba', 1), cambiarColor('imgSuba', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaSuba" class="zona Suba" style="position: absolute; z-index: 1;">
+                        <img id="imgSuba" src="Img/Bogotá/2.png" style="position: absolute;top: -16%;left: 0.8%;opacity: 1;transform: rotate(-9deg);z-index: 2;"data-opacidad="1">
+                    </div>
+
+                    <!--CHAPINERO-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute; top: 2%; left: 30.5%; width: 13%; height: 30%; transform: rotate(10deg); z-index: 3; pointer-events: none; ">
+                    <polygon points="20,40 30,60 60,-1 85,1 85,30 100,65 85,80 85,105 0,105" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Chapinero: No contamos con tienda en esta zona."
+                        onmouseover="cambiarOpacidad('imgChapinero', 0.4), mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgChapinero', 0.5), ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaChapinero" class="zona Chapinero" style="position: absolute; z-index: 1;">
+                        <img id="imgChapinero" src="Img/Bogotá/3.png" style="position: absolute; top: 5%; left: -4%; opacity: 0.5; transform: rotate(-9deg); z-index: 2;" data-opacidad="0.5">
+                    </div>
+
+                    <!--BARRIOS UNIDOS-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 31%;left: 28.6%;width: 7.2%;height: 12%;transform: rotate(10deg);z-index: 3;pointer-events: none;">
+                    <polygon points="-10,0 110,1 115,50 110,65 80,100 0,60 -10,25" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Barrios Unidos: No contamos con tienda en esta zona."
+                        onmouseover="cambiarOpacidad('imgBarriosUnidos', 0.4), cambiarColor('imgBarriosUnidos', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgBarriosUnidos', 0.5), cambiarColor('imgBarriosUnidos', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaBarriosUnidos" class="zona BarriosUnidos" style="position: absolute; z-index: 1;">
+                        <img id="imgBarriosUnidos" src="Img/Bogotá/4.png" style="position: absolute;top: -15%;left: -2%;opacity: 0.5;transform: rotate(-9deg);z-index: 2;"data-opacidad="0.5">
+                    </div>
+
+                    <!--ENGATIVA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 43%;left: 18.5%;width: 16%;height: 18%;transform: rotate(-40deg);z-index: 3;pointer-events: none;">
+                    <polygon points="129,10 130,40 140,70 145,95 70,85 70,70 40,70 -40,95 -15,10 50,0 80,3 90,10 110,15" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Engativá"
+                        onclick="mostrarInfo(event, INFOENGATIVA); seleccionarZona('zonaEngativa')"
+                        onmouseover="cambiarOpacidad('imgEngativa', 0.5), cambiarColor('imgEngativa', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgEngativa', 1), cambiarColor('imgEngativa', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaEngativa" class="zona Engativa" style="position: absolute; z-index: 1;">
+                        <img id="imgEngativa" src="Img/Bogotá/5.png" style="position: absolute;top: 4%;left: 1%;opacity: 1;transform: rotate(-9deg);z-index: 2;"data-opacidad="1">
+                    </div>
+
+                    <!--FONTIBON-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 46%;left: 24.5%;width: 13%;height: 30%;transform: rotate(10deg);z-index: 3;pointer-events: none;">
+                    <polygon points="71,-5 97,5 98,15 85,25 85,30 70,42 70,57  75,70 70,72 70,90 25,103 11,77 0,80 25,25 30,20 36,25" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Fontibón"
+                        onclick="mostrarInfo(event, INFOFONTIBON); seleccionarZona('zonaFontibon')"
+                        onmouseover="cambiarOpacidad('imgFontibon', 0.5), cambiarColor('imgFontibon', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgFontibon', 1), cambiarColor('imgFontibon', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaFontibon" class="zona Fontibon" style="position: absolute; z-index: 1;">
+                        <img id="imgFontibon" src="Img/Bogotá/6.png" style="position: absolute;top: 4%;left: 1%;opacity: 1;transform: rotate(-9deg);z-index: 2;"data-opacidad="1">
+                    </div>
+
+                    <!--TEUSAQUILLO-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 33%;left: 34%;width: 8%;height: 17%;transform: rotate(10deg);z-index: 3;pointer-events: none;">
+                    <polygon points="18,0 90,5 75,23 76,50 43,95 -3,73 20,45 " 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Teusaquillo: No contamos con tienda en esta zona."
+                        onmouseover="cambiarOpacidad('imgTeusaquillo', 0.4), cambiarColor('imgTeusaquillo', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgTeusaquillo', 0.5), cambiarColor('imgTeusaquillo', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaTeusaquillo" class="zona Teusaquillo" style="position: absolute; z-index: 1;">
+                        <img id="imgTeusaquillo" src="Img/Bogotá/7.png" style="position: absolute;top: 4.5%;left: 1%;opacity: 0.5;transform: rotate(-9deg);z-index: 2;"data-opacidad="0.5">
+                    </div>
+
+                    <!--SANTAFE-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 6%;left: 40%;width: 12%;height: 35%;transform: rotate(10deg);z-index: 3;pointer-events: none;">
+                    <polygon points="10,-12 30,-15 90,-5 100,15 100,25 79,32 82,50 68,85 80,87 85,95 90,97 85,100 80,104 72,104 65,115 
+                    8,97 10,72 25,60 25,50 14,36 14,30 10,25" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Santa Fe: No contamos con tienda en esta zona."
+                        onmouseover="cambiarOpacidad('imgSantafe', 0.4), cambiarColor('imgSantafe', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgSantafe', 0.5), cambiarColor('imgSantafe', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaSantafe" class="zona Santafe" style="position: absolute; z-index: 1;">
+                        <img id="imgSantafe" src="Img/Bogotá/8.png" style="position: absolute;top: 4.5%;left: 1%;opacity: 0.5;transform: rotate(-9deg);z-index: 2;" data-opacidad="0.5">
+                    </div>
+
+                    <!--CANDELARIA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 29%;left: 43%;width: 5%;height: 10%;transform: rotate(10deg);z-index: 3;pointer-events: none;">
+                    <polygon points="25,18 30,30 40,45 79,45 82,50 82,85 75,87 55,92 35,80 25,50 20,36 20,30" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="La Candelaria: No contamos con tienda en esta zona."
+                        onmouseover="cambiarOpacidad('imgCandelaria', 0.4), cambiarColor('imgCandelaria', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgCandelaria', 0.5), cambiarColor('imgCandelaria', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaCandelaria" class="zona Candelaria" style="position: absolute; z-index: 1;">
+                        <img id="imgCandelaria" src="Img/Bogotá/9.png" style="position: absolute; top: 4%; left: 3%; opacity: 0.5; transform: rotate(-9deg); z-index: 2;" data-opacidad="0.5">
+                    </div>
+
+                    <!--MARTIRES-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 36%;left: 40%;width: 6.5%;height: 11%;transform: rotate(10deg);z-index: 3;pointer-events: none;">
+                    <polygon points="10,0 110,40 100,100 75,87 -10,40 -20,30" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Los Mártires"
+                        onclick="mostrarInfo(event, INFOMARTIRES); seleccionarZona('zonaMartires')"
+                        onmouseover="cambiarOpacidad('imgMartires', 0.5), cambiarColor('imgMartires', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgMartires', 1), cambiarColor('imgMartires', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaMartires" class="zona Martires" style="position: absolute; z-index: 1;">
+                        <img id="imgMartires" src="Img/Bogotá/10.png" style="position: absolute;top: -10%;left: 2%;opacity: 1;transform: rotate(-9deg);z-index: 2;"data-opacidad="1">
+                    </div>
+
+                    <!--PUENTE ARANDA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 39.5%;left: 37%;width: 9.5%;height: 19%;transform: rotate(10deg);z-index: 3;pointer-events: none;">
+                    <polygon points="25,4 87,40 96,52 110,100 75,87 15,75 15,70 0,60 20,25" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Puente Aranda: No contamos con tienda en esta zona."
+                        onmouseover="cambiarOpacidad('imgPuenteA', 0.4), cambiarColor('imgPuenteA', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgPuenteA', 0.5), cambiarColor('imgPuenteA', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaPuenteA" class="zona PuenteA" style="position: absolute; z-index: 1;">
+                        <img id="imgPuenteA" src="Img/Bogotá/11.png" style="position: absolute;top: 0%;left: -3%;opacity: 0.5;transform: rotate(-9deg);z-index: 2;"data-opacidad="0.5">
+                    </div>
+
+                    <!--KENNEDY-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 52%;left: 33%;width: 13%;height: 27%;transform: rotate(10deg);z-index: 3;pointer-events: none;">
+                    <polygon points="33,4 95,20 98,35 92,40 90,45 85,55 95,68 90,79 85,80 76,90 70,85 60,82 46,89 40,98 30,100 20,90 6,70 8,65 1,52 0,40 17,25 20,17" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Kennedy"
+                        onclick="mostrarInfo(event, INFOKENNEDY); seleccionarZona('zonaKennedy')"
+                        onmouseover="cambiarOpacidad('imgKennedy', 0.5), cambiarColor('imgKennedy', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgKennedy', 1), cambiarColor('imgKennedy', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaKennedy" class="zona Kennedy" style="position: absolute; z-index: 1;">
+                        <img id="imgKennedy" src="Img/Bogotá/12.png" style="position: absolute;top: 2%;left: 2%;opacity: 1;transform: rotate(-9deg);z-index: 2;"data-opacidad="1">
+                    </div>
+
+                    <!--BOSA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 64%;left: 35%;width: 11%;height: 29%;transform: rotate(10deg);z-index: 3;pointer-events: none;">
+                    <polygon points="5,52 20,53 40,35 55,35 60,40 65,40 72,30 82,30 85,19 80,15 75,0 80,-10 85,0 90,30 95,68 90,79 85,80 76,90 70,100 60,100 58,105 40,98 30,110 20,90 0,70 0,65  " 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Bosa: No contamos con tienda en esta zona."
+                        onmouseover="cambiarOpacidad('imgBosa', 0.4), cambiarColor('imgBosa', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgBosa', 0.5), cambiarColor('imgBosa', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaBosa" class="zona Bosa" style="position: absolute; z-index: 1;">
+                        <img id="imgBosa" src="Img/Bogotá/13.png" style="position: absolute;top: 5%;left: 0%;opacity: 0.5;transform: rotate(-9deg);z-index: 2;"data-opacidad="0.5">
+                    </div>
+
+                    <!--SAN CRISTOBAL-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 19.3%;left: 46.3%;width: 15%;height: 29%;transform: rotate(10deg);z-index: 3;pointer-events: none;">
+                    <polygon points="15,10 35,2 56,2 85,12 91,10 97,27 93,45 84,48 72,45 65,48 58,49 50,48 50,54 55,58 62,57 90,70 92,72 81,75 79,80 63,87 60,92 45,97 38,103 23,90 4,80 8,72 21,67 18,65 11,56 5,56 8,52 15,25" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="San Cristóbal: No contamos con tienda en esta zona."
+                        onmouseover="cambiarOpacidad('imgSanCristobal', 0.4), cambiarColor('imgSanCristobal', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgSanCristobal', 0.5), cambiarColor('imgSanCristobal', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaSanCristobal" class="zona SanCristobal" style="position: absolute; z-index: 1;">
+                        <img id="imgSanCristobal" src="Img/Bogotá/14.png" style="position: absolute;top: -4%;left: 2%;opacity: 0.5;transform: rotate(-9deg);z-index: 2;"data-opacidad="0.5">
+                    </div>
+
+                    <!--ANTONIO NARIÑO-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 41%;left: 45%;width: 3%;height: 15%;transform: rotate(10deg);z-index: 3;pointer-events: none;">
+                    <polygon points="20,-50 45,-60 80,-38 100,-40 85,20 55,18 62,115 55,150 21,67 18,65 11,56 5,56 8,52 15,25" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Antonio Nariño: No contamos con tienda en esta zona."
+                        onmouseover="cambiarOpacidad('imgAntonioN', 0.4), cambiarColor('imgAntonioN', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgAntonioN', 0.5), cambiarColor('imgAntonioN', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaAntonioN" class="zona AntonioN" style="position: absolute; z-index: 1;">
+                        <img id="imgAntonioN" src="Img/Bogotá/15.png" style="position: absolute;top: -5%;left: -3%;opacity: 0.5;transform: rotate(-9deg);z-index: 2;width: 120%;"data-opacidad="0.5">
+                    </div>
+
+                    <!--RAFAEL URIBE-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 44%;left: 46.5%;width: 9%;height: 15%;transform: rotate(10deg);z-index: 3;pointer-events: none;">
+                    <polygon points="5,5 45,32 65,18 95,15 95,10 110,10 112,30 105,56 80,60 46,83 30,80 11,96 -10,90 -15,75 -10,28 0,25" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Rafael Uribe Uribe: No contamos con tienda en esta zona."
+                        onmouseover="cambiarOpacidad('imgRafaelU', 0.4), cambiarColor('imgRafaelU', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgRafaelU', 0.5), cambiarColor('imgRafaelU', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaRafaelU" class="zona RafaelU" style="position: absolute; z-index: 1;">
+                        <img id="imgRafaelU" src="Img/Bogotá/16.png" style="position: absolute;top: -6%;left: -5%;opacity: 0.5;transform: rotate(-9deg);z-index: 2;width: 110%;"data-opacidad="0.5">
+                    </div>
+
+                    <!--TUNJUELITO-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 54%;left: 45%;width: 13.5%;height: 10.5%;transform: rotate(-10deg);z-index: 3;pointer-events: none;">
+                    <polygon points="-60,5 -25,20 5,8 28,20 75,5 95,10 138,15 138,20 148,15 185,30 120,23 108,36 100,18 95,49 46,45 48,53 30,65 17,56 -10,86 -35,85 -60,100 -80,80 -63,50 -70,20" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Tunjuelito: No contamos con tienda en esta zona."
+                        onmouseover="cambiarOpacidad('imgTunjuelito', 0.4), cambiarColor('imgTunjuelito', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgTunjuelito', 0.5), cambiarColor('imgTunjuelito', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaTunjuelito" class="zona Tunjuelito" style="position: absolute; z-index: 1;">
+                        <img id="imgTunjuelito" src="Img/Bogotá/17.png" style="position: absolute;top: -4%;left: -1%;opacity: 0.5;transform: rotate(-9deg);z-index: 2;width: 90%;" data-opacidad="0.5">
+                    </div>
+                    
+                    <!--CIUDAD BOLIVAR-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 52.4%;left: 45%;width: 39.3%;height: 33%;transform: rotate(5deg);z-index: 3;pointer-events: none;">
+                    <polygon points="-76,50 -69,50 -66,56 -62,49 -50,42 -45,34 -40,34 -35,27 -22,24 -23,15 -18,18 -18,15 -12,15 0,10 4,10 4,13 7,15 12,12 28,13 38,3 47,6 49,3 60,8 66,17 70,16 75,20 95,26 100,22 110,24 110,22 130,24 135,20 148,22 162,15 165,28 163,40 168,42 170,45 166,54 172,60  173,70 170,80 175,87 173,95 160,100 100,78 50,70 2,83 -18,70 -70,84" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Ciudad Bolívar: No contamos con tienda en esta zona."
+                        onmouseover="cambiarOpacidad('imgCiudadB', 0.4), cambiarColor('imgCiudadB', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgCiudadB', 0.5), cambiarColor('imgCiudadB', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaCiudadB" class="zona CiudadB" style="position: absolute; z-index: 1;">
+                        <img id="imgCiudadB" src="Img/Bogotá/18.png" style="position: absolute;top: 1.2%;left: -0.8%;opacity: 0.5;transform: rotate(-9deg);z-index: 2;"data-opacidad="0.5">
+                    </div>
+
+                    <!--USME-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 30%;left: 53%;width: 41.2%;height: 60%;transform: rotate(5deg);z-index: 3;pointer-events: none;">
+                    <polygon points="3,3 8,4 15,6 18,14 28,12 36,17 40,30 70,33 79,31 102,48 108,45 118,73 117,82 118,90 125,98 123,100 108,97 106,93 100,90 90,93 88,92 88,88 86,84 87,77 88,74 83,70 86,65 81,61 82,55 81,48 72,52 65,51 62,53 50,52 44,54 30,50 19,41 17,44 15,42 11,43 8,47 0,46 -5,48 -6,46 -10,46 -11,44 -17,45 -14,40 -15,34 -18,33 -15,31 -10,29 -9,27 -4,25 -6,22 -15,17 -16,16 -21,17 -22,15 -23,12 -18,13 -10,12 -1,13" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Usme: No contamos con tienda en esta zona."
+                        onmouseover="cambiarOpacidad('imgUsme', 0.4), cambiarColor('imgUsme', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgUsme', 0.5), cambiarColor('imgUsme', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaUsme" class="zona Usme" style="position: absolute; z-index: 1;">
+                        <img id="imgUsme" src="Img/Bogotá/19.png" style="position: absolute; top: -1.5%; left: 2.5%; opacity: 0.5; transform: rotate(-9deg); z-index: 2; width: 95%;"data-opacidad="0.5">
+                    </div>
+
+                    <!--SUMAPAZ-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" 
+                    style="position: absolute;top: 60%;left: 90%;width: 8%;height: 35%;transform: rotate(-5deg);z-index: 3;pointer-events: none;">
+                    <polygon points="10,-50 20,-40 50,-5 60,0 60,14 80,0 95,0 75,155 27,125 18,105 25,100 16,95 25,40" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Sumapaz: No contamos con tienda en esta zona."
+                        onmouseover="cambiarOpacidad('imgSumapaz', 0.4); cambiarColor('imgSumapaz', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgSumapaz', 0.5); cambiarColor('imgSumapaz', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaSumapaz" class="zona Sumapaz" style="position: absolute; z-index: 1;">
+                        <img id="imgSumapaz" src="Img/Bogotá/20.png" style="position: absolute;top: 2%;left: -1%;opacity: 0.5;transform: rotate(-5deg);z-index: 2;width: 95%;"data-opacidad="0.5">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="info">
+                <p>i</p>
+            </div>
+            
+            <div id="info-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <p>
+                        Aquí encontrarás el <strong>mapa de Bogotá</strong> dividido por localidades.<br><br>
+                        Las <strong>localidades que tienen color</strong> son aquellas en las que <strong>Homecenter cuenta con una tienda</strong>.<br><br>
+                        Al dar clic en una localidad con color, podrás ver la <strong>información de la tienda</strong> correspondiente.<br><br>
+                        A la derecha verás una <strong>lista de localidades</strong>:<br>
+                        - <strong>Punto verde 🟢</strong>: contamos con tienda.<br>
+                        - <strong>Punto rojo 🔴</strong>: no contamos con tienda.<br><br>
+                        También puedes hacer clic en la lista para ver la información de la tienda que se encuentra en esa localidad.
+                    </p>
+                    
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="info-box" class="info-box"></div>
+
+        <div id="tooltip"></div>
+
+    </div>
+
+    <footer>
+        <div class="Chatbot">
+            <p>Volver al chatbot</p>
+            <img src="Img/Franco_Idel.png" alt="Return" class="ChatFranco">
+        </div>
+
+        <div class="returnCol" id="return-button">
+            <p>Regresar</p>
+            <div class="btnReturn" id="arrow">
+                <p>⬅︎</p>
+            </div>
+        </div>
+    </footer>
+    
+
+</body>
+</html>

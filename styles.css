@@ -371,20 +371,23 @@ footer{
 @media only screen and (max-width: 600px) {
     @supports (padding: env(safe-area-inset-bottom)) {
 
+        html, body {
+            height: 100vh;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            margin: 0;
+            box-sizing: border-box;
+        }
+
         footer{
             padding: 6px 6px calc(6px + env(safe-area-inset-bottom)) 6px;
             bottom: calc(env(safe-area-inset-bottom));
         }
 
-        .card{
-            bottom: calc(env(safe-area-inset-bottom));
+        .card, .newCard{
+            bottom: calc(10px + env(safe-area-inset-bottom));
         }
 
-        html, body {
-            height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-            padding-top: env(safe-area-inset-top);
-            padding-bottom: env(safe-area-inset-bottom);
-        }
     }
 }
 

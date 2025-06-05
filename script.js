@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ButtonAntioquia = document.querySelector(".btnAntioquia");
     const ButtonAtlantico = document.querySelector(".btnAtlantico");
     const ButtonBolivar = document.querySelector(".btnBolivar");
+    const ButtonBoyaca = document.querySelector(".btnBoyaca");
 
     const newCard = document.querySelector('.newCard');
     const newCircle = document.querySelector('.newcircle');
@@ -199,6 +200,18 @@ document.addEventListener("DOMContentLoaded", () => {
     
             setTimeout(() => {
                 window.location.href = "MapaBolivar.html";
+            }, 500); 
+        });
+    }
+
+    if(ButtonBoyaca){
+        ButtonBoyaca.addEventListener("click", () => {
+            // Solo desaparecer el contenido interno
+            const cardContent = document.querySelector('.card').innerHTML;
+            fadeOutContent(); 
+    
+            setTimeout(() => {
+                window.location.href = "MapaBoyaca.html";
             }, 500); 
         });
     }

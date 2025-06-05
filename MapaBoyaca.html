@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colombia</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles1.css">
+    <script src="script.js"></script>
+    <script src="script1.js"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/hmu6tii.css">
+</head>
+<body>
+
+    <div class="newcircle" style="bottom: 50%; height: 100%; width:150%; position: absolute; background: #3e91d4; border-radius: 50%; transition: all 1.5s ease-in-out; pointer-events: none; z-index: 0;"></div>
+    <div class="circle" style="bottom: -10%; height: 150%; width:300%;"></div>
+    
+    <div class="container">
+        <div class="newCard" style="width: 50% ;height: 60%;background: #E7F0FE; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); position: absolute; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; "></div>
+        <div class="card" style="width: 70%;">
+            
+            <div class="card-content">
+            <p class="tituloMap" style="z-index: 0;">
+                BOYACÁ
+            </p>
+                <div class="map-container">
+                
+                    
+
+                    <div class="SecuenciaMapa" style="opacity: 1;position: relative;width: 80%; left: 10%;">
+                        <img id="secuenciaImagen" src="Img/Boyaca/Secuencia/MapaR_00034.png" alt="Mapa Interactivo" style="width: 100%; opacity:1">
+                    </div>
+
+                    <div id="listaZonas" class="lista" style="height: 40%;">
+                        <div class="tituloLocalidades">Municipios</div>
+                        <div class="contenido-lista">
+                            <span class="zona-lista2">🔴 Chíquiza</span>
+                            <span class="zona-lista2"> 🔴 Sora</span>
+                            <span class="zona-lista2"> 🔴 Motavita</span>
+                            <span class="zona-lista2"> 🔴 Cómbita</span>
+                            <span class="zona-lista2"> 🔴 Cucaita</span>
+                            <span class="zona-lista" data-zona="Tunja">🟢 Tunja</span>
+                            <span class="zona-lista2"> 🔴 Oicatá</span>
+                            <span class="zona-lista2"> 🔴 Chivatá</span>
+                            <span class="zona-lista2"> 🔴 Soracá</span>
+                        </div>
+                        
+                    </div>     
+                    
+                    <style>
+                        .card, .circle {
+                            opacity: 0;
+                            transition: opacity 1s ease;
+                        }
+                        .newcircle, .newCard {
+                            transition: all 1.5s ease-in-out, opacity 1s ease;
+                        }
+                        #secuenciaImagen {
+                            transition: opacity 1s ease;
+                        }
+
+                        
+                    </style>
+                    
+                    <script>
+
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const card = document.querySelector('.card');
+                        const circle = document.querySelector('.circle');
+
+                        const newCard = document.querySelector('.newCard');
+                        const newCircle = document.querySelector('.newcircle');
+
+                        if (card && circle) {
+                                // Calcular altura
+                                const cardHeight = card.scrollHeight;
+                                console.log("Altura actual de la tarjeta (cardHeight):", cardHeight, "px");
+
+                                // Aumentar opacidad para que aparezcan
+                                setTimeout(() => {
+                                    card.style.opacity = 1;
+                                    circle.style.opacity = 1;
+                                }, 1500); // pequeño retraso para asegurar que todo esté cargado
+
+                                if (newCard && newCircle) {
+                                    // Usamos el mismo cardHeight de 'card' para 'newCard'
+                                    console.log("Usando altura de card para animar newCard:", cardHeight, "px");
+
+                                    // Pequeño timeout para que se vea la aparición
+                                    setTimeout(() => {
+                                        // 1. Hacer visibles
+                                        newCard.style.opacity = "1";
+                                        newCircle.style.opacity = "1";
+
+                                        // 2. Animar propiedades
+                                        newCard.style.width = "70%";
+                                        newCard.style.height = `${cardHeight - 57}px`;
+
+                                        newCircle.style.width = "300%";
+                                        newCircle.style.height = "150%";
+                                        newCircle.style.bottom = "-10%";
+                                    }, 0); // pequeño retardo para que cargue todo
+
+                                }
+                            }
+                    });
+
+                    // Variable global para saber si la animación ya terminó
+                    window.animacionTerminada = false;
+
+                    window.reproducirAnimacion = function () {
+                        // Si ya terminó la animación, no la vuelvas a reproducir
+                        if (window.animacionTerminada) {
+                            return;
+                        }
+
+                        let imagenActual = 34;
+                        const imagenFinal = 120;
+                        const imagen = document.getElementById('secuenciaImagen');
+
+                        const numeroConCeros = imagenActual.toString().padStart(5, '0');
+                        imagen.src = `Img/Boyaca/Secuencia/MapaR_${numeroConCeros}.png`;
+
+                        clearInterval(window.intervaloAnimacion);
+
+                        // Ocultar elementos interactivos al inicio
+                        const areaInteractiva = document.querySelector('.area-interactiva');
+
+                        const zonaChiquiza = document.getElementById('zonaChiquiza');
+                        const imgChiquiza = document.getElementById('imgChiquiza');
+                        
+                        const zonaSora = document.getElementById('zonaSora');
+                        const imgSora = document.getElementById('imgSora');
+                        
+                        const zonaMotavita = document.getElementById('zonaMotavita');
+                        const imgMotavita = document.getElementById('imgMotavita');
+
+                        const zonaCombita = document.getElementById('zonaCombita');
+                        const imgCombita = document.getElementById('imgCombita');
+
+                        const zonaCucaita = document.getElementById('zonaCucaita');
+                        const imgCucaita = document.getElementById('imgCucaita');
+
+                        const zonaTunja = document.getElementById('zonaTunja');
+                        const imgTunja = document.getElementById('imgTunja');
+
+                        const zonaOicata = document.getElementById('zonaOicata');
+                        const imgOicata = document.getElementById('imgOicata');
+
+                        const zonaChivata = document.getElementById('zonaChivata');
+                        const imgChivata = document.getElementById('imgChivata');
+
+                        const zonaSoraca = document.getElementById('zonaSoraca');
+                        const imgSoraca = document.getElementById('imgSoraca');
+                        
+
+                        if (areaInteractiva) areaInteractiva.style.display = "none";
+
+                        if (zonaChiquiza) zonaChiquiza.style.display = "none";
+                        if (imgChiquiza) imgChiquiza.style.display = "none";
+                        
+                        if (zonaSora) zonaSora.style.display = "none";
+                        if (imgSora) imgSora.style.display = "none";
+                        
+                        if (zonaMotavita) zonaMotavita.style.display = "none";
+                        if (imgMotavita) imgMotavita.style.display = "none";
+
+                        if (zonaCombita) zonaCombita.style.display = "none";
+                        if (imgCombita) imgCombita.style.display = "none";
+
+                        if (zonaCucaita) zonaCucaita.style.display = "none";
+                        if (imgCucaita) imgCucaita.style.display = "none";
+
+                        if (zonaTunja) zonaTunja.style.display = "none";
+                        if (imgTunja) imgTunja.style.display = "none";
+
+                        if (zonaOicata) zonaOicata.style.display = "none";
+                        if (imgOicata) imgOicata.style.display = "none";
+
+                        if (zonaChivata) zonaChivata.style.display = "none";
+                        if (imgChivata) imgChivata.style.display = "none";
+
+                        if (zonaSoraca) zonaSoraca.style.display = "none";
+                        if (imgSoraca) imgSoraca.style.display = "none";
+                        
+
+                        setTimeout(() => {
+                            window.intervaloAnimacion = setInterval(() => {
+                                imagenActual++;
+                                if (imagenActual <= imagenFinal) {
+                                    const numeroConCeros = imagenActual.toString().padStart(5, '0');
+                                    imagen.src = `Img/Boyaca/Secuencia/MapaR_${numeroConCeros}.png`;
+                                } else {
+                                    clearInterval(window.intervaloAnimacion);
+                                    window.animacionTerminada = true; // Marcar como completada
+
+                                    setTimeout(() => {
+                                        imagen.style.opacity = "0";
+                                    }, 200);
+
+                                    // Mostrar elementos interactivos una vez termine la animación
+                                    if (areaInteractiva) areaInteractiva.style.display = "block";
+
+                                    if (zonaChiquiza) zonaChiquiza.style.display = "block";
+                                    if (imgChiquiza) imgChiquiza.style.display = "block";
+                                    
+                                    if (zonaSora) zonaSora.style.display = "block";
+                                    if (imgSora) imgSora.style.display = "block";
+                                    
+                                    if (zonaMotavita) zonaMotavita.style.display = "block";
+                                    if (imgMotavita) imgMotavita.style.display = "block";
+
+                                    if (zonaCombita) zonaCombita.style.display = "block";
+                                    if (imgCombita) imgCombita.style.display = "block";
+
+                                    if (zonaCucaita) zonaCucaita.style.display = "block";
+                                    if (imgCucaita) imgCucaita.style.display = "block";
+
+                                    if (zonaTunja) zonaTunja.style.display = "block";
+                                    if (imgTunja) imgTunja.style.display = "block";
+
+                                    if (zonaOicata) zonaOicata.style.display = "block";
+                                    if (imgOicata) imgOicata.style.display = "block";
+                                    
+                                    if (zonaChivata) zonaChivata.style.display = "block";
+                                    if (imgChivata) imgChivata.style.display = "block";
+
+                                    if (zonaSoraca) zonaSoraca.style.display = "block";
+                                    if (imgSoraca) imgSoraca.style.display = "block";
+                                }
+                            }, 100);
+                        }, 1000);
+                    };
+
+                    // Si ya se mostró el modal antes, iniciar animación directamente (solo una vez)
+                    if (sessionStorage.getItem("modalShownBogota")) {
+                        window.addEventListener("DOMContentLoaded", () => {
+                            if (document.getElementById('secuenciaImagen')) {
+                                setTimeout(() => {
+                                    window.reproducirAnimacion();
+                                }, 2000);
+                            }
+                        });
+                    }
+
+                    const INFOTUNJA = `
+                        <h2>ZONA TUNJA</h2>
+                        
+                        <div class="info-content">
+                            <div class="Barrio">
+                                <img src="Img/Tienda.png" alt="Tienda en Suba">
+                                <h6>ALMACEN TUNJA</h6>
+                            </div>
+                            <div class="info-text">
+                                <h3><strong>Dirección:</strong> <br>📍 Av Universitaria #50 - 21.</h3>
+                                <h3><strong>Teléfono: </strong><br>📞 018000127373.</h3>
+                                <h3><strong>Horario: </strong><br>📅 8 am - 9 pm.</h3>
+                            </div>
+                        </div>`;
+                        
+                        const ZONAS_INFO = {
+                            Tunja: INFOTUNJA
+                        };
+
+                        const MAPEO_ZONAS = {
+                            "TUNJA": "Tunja"
+                        };
+                    </script>
+
+                    <!--CHIQUIZA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaChiquiza"
+                    style="display: none; position: absolute; top: 22.8%; left: 31.3%; width: 17.5%; height: 44%; z-index: 3; transform: rotate(-9deg); pointer-events: none;">
+                    <polygon points="30,28 29,18 35,14 40,13 50,17 55,15 70,0 88,-2 92,5  94,11 98,20 96,40 87,50 85,50 73,62 73,60 70,61 65,60 64,63 60,65 54,65 45,73 40,74 28,76 20,80 15,83 12,83 11,96 7,95 5,78 0,75 2,70 0,58 5,58 7,52 10,50 15,50 23,46 23,35" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="ChÍquiza: No contamos con tienda en esta localidad."
+                        onmouseover="cambiarOpacidad('imgChiquiza', 0.4), mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgChiquiza', 0.5), ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaChiquiza" class="zona Chiquiza" style="position: absolute; z-index: 1;">
+                        <img id="imgChiquiza" src="Img/Boyaca/1.png" style="display: none;position: absolute;width: 95%;top: 0;left: 2%;opacity: 0.5;z-index: 2;filter: none;transform: rotate(9deg);"data-opacidad="0.5">
+                    </div>
+
+                    <!--SORA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaSora"
+                    style="display: none; position: absolute;top: 49%;left: 34%;width: 13%;height: 18%;z-index: 3;transform: rotate(-9deg); pointer-events: none;">
+                    <polygon points="30,28 40,25 55,15 62,8 80,5 90,-2 98,2 104,-5 115,33 123,33 123,55 100,66 92,83 73,85 70,80 68,80 65,75 50,74 20,82 15,83 12,83 12,93 -8,90 -10,87 -15,85 -27,85 -27,47 -20,48 -5,34" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Sora: No contamos con tienda en esta localidad."
+                        onmouseover="cambiarOpacidad('imgSora', 0.4), mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgSora', 0.5), ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaSora" class="zona Sora" style="position: absolute; z-index: 1;">
+                        <img id="imgSora" src="Img/Boyaca/2.png" style="display: none;position: absolute;width: 98%;top: -14px;left: 1%;opacity: 0.5;z-index: 2;filter: none;transform: rotate(9deg);"data-opacidad="0.5">
+                    </div>
+
+                    <!--MOTAVITA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaMotavita"
+                    style="display: none; position: absolute;top: 34%;left: 43%;width: 9.5%;height: 31%;z-index: 3;transform: rotate(-9deg); pointer-events: none;">
+                    <polygon points="37,12 40,12 57,-12 62,-21 75,-18 82,-7 78,20 85,25 83,55 96,65 98,88 95,88 91,97 80,107 70,114 60,118 51,120 51,116 35,116 20,115 5,104 10,90 29,80 29,65 24,63 17,40" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Motavita: No contamos con tienda en esta localidad."
+                        onmouseover="cambiarOpacidad('imgMotavita', 0.4), mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgMotavita', 0.5), ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaMotavita" class="zona Motavita" style="position: absolute; z-index: 1;">
+                        <img id="imgMotavita" src="Img/Boyaca/3.png" style="display: none;position: absolute;width: 97%;top: 0.6%;left: 10%;opacity: 0.5;z-index: 2;filter: none;transform: rotate(9deg);"data-opacidad="0.5">
+                    </div>
+
+                    <!--COMBITA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaCombita"
+                    style="display: none; position: absolute;top: 0%;left: 47%;width: 14.5%;height: 56%;z-index: 3;transform: rotate(-9deg); pointer-events: none;">
+                    <polygon points="3,-4 15,-3 21,-22 27,-25 27,-32 35,-31 36,-35 41,-36  45,-10 43,-8 51,-2 55,20 62,30 64,32 75,50 91,46 95,50 90,60 97,62 100,68 87,87 83,88 65,100 48,116 45,126 38,127 36,135 29,129 21,115 16,113 18,91 15,90 16,68 33,61 29,58 29,45 25,42 17,40 17,30 6,20 6,17 15,5" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Cómbita: No contamos con tienda en esta localidad."
+                        onmouseover="cambiarOpacidad('imgCombita', 0.4), mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgCombita', 0.5), ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaCombita" class="zona Combita" style="position: absolute; z-index: 1;">
+                        <img id="imgCombita" src="Img/Boyaca/4.png" style="display: none;position: absolute;width: 110%;top: 2.1%;left: -6.5%;opacity: 0.5;z-index: 2;filter: none;transform: rotate(9deg);"data-opacidad="0.5">
+                    </div>
+
+                    <!--CUCAITA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaCucaita"
+                    style="display: none; position: absolute;top: 61.5%;left: 35%;width: 10.5%;height: 22%;z-index: 3;transform: rotate(-9deg); pointer-events: none;">
+                    <polygon points="3,14 17,15 20,18 30,20 33,10 60,3 70,2 80,5 82,30 81,47 90,60 95,70 85,80 95,88 92,91 78,85 56,94 49,94 45,89 33,80 25,61 1,36" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Cucaita: No contamos con tienda en esta localidad."
+                        onmouseover="cambiarOpacidad('imgCucaita', 0.4), mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgCucaita', 0.5), ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaCucaita" class="zona Cucaita" style="position: absolute; z-index: 1;">
+                        <img id="imgCucaita" src="Img/Boyaca/5.png" style="display: none;position: absolute;width: 105%;top: -1%;left: -3%;opacity: 0.5;z-index: 2;filter: none;transform: rotate(9deg);"data-opacidad="0.5">
+                    </div>
+
+                    <!--TUNJA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaTunja"
+                    style="display: none; position: absolute;top: 54%;left: 39%;width: 18%;height: 40%; z-index: 3; pointer-events: none;">
+                    <polygon points="20,22 30,20 38,23 55,21 55,24 62,20 68,15 75,2 80,1 85,5 96,15 98,24 95,30 89,30 88,41 81,48 72,48 67,59 68,70 57,77 57,80 51,82 47,87 34,88 32,95 25,98 17,98 10,90 0,82 0,79 5,77 10,77 9,75 12,73 12,71 20,63 24,62 35,65 35,64 30,62 31,51 21,40" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Tunja"
+                        onclick="mostrarInfo(event, INFOTUNJA); seleccionarZona('zonaTunja')"
+                        onmouseover="cambiarOpacidad('imgTunja', 0.5), cambiarColor('imgTunja', 'grayscale(0%)'); mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgTunja', 1), cambiarColor('imgTunja', 'grayscale(80%)'); ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaTunja" class="zona Tunja" style="position: absolute; z-index: 1;">
+                        <img id="imgTunja" src="Img/Boyaca/6.png" style="display: none;position: absolute;width: 101%;top: 0%;left: -1%;opacity: 1;z-index: 2;filter: none;"data-opacidad="1">
+                    </div>
+
+                    <!--OCAITA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaOicata"
+                    style="display: none; position: absolute;top: 37%;left: 53%;width: 12%;height: 23%;z-index: 3;transform: rotate(-9deg); pointer-events: none;">
+                    <polygon points="3,64 15,61 15,55 20,48 30,37 60,8 70,8 75,5 82,7 82,30 90,38 95,37 98,45 107,45 100,60 85,70 85,80 85,90 75,95 60,96 50,90 15,94 0,80" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Oicatá: No contamos con tienda en esta localidad."
+                        onmouseover="cambiarOpacidad('imgOicata', 0.4), mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgOicata', 0.5), ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaOicata" class="zona Oicata" style="position: absolute; z-index: 1;">
+                        <img id="imgOicata" src="Img/Boyaca/7.png" style="display: none;position: absolute;width: 93.5%;top: -3%;left: 8%;opacity: 0.5;z-index: 2;filter: none;transform: rotate(9deg);"data-opacidad="0.5">
+                    </div>
+
+                    <!--CHIVATA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaChivata"
+                    style="display: none; position: absolute;top: 45%;left: 55%;width: 13%;height: 27%;z-index: 3;transform: rotate(-9deg); pointer-events: none;">
+                    <polygon points="7,46 38,45 45,48 64,45 65,30 80,15 82,7 90,5 100,12 100,20 80,38 78,43 65,58 77,67 76,83 68,92 60,89 50,85 45,93 33,95 20,100 1,75 8,60" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Chivatá: No contamos con tienda en esta localidad."
+                        onmouseover="cambiarOpacidad('imgChivata', 0.4), mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgChivata', 0.5), ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaChivata" class="zona Chivata" style="position: absolute; z-index: 1;">
+                        <img id="imgChivata" src="Img/Boyaca/8.png" style="display: none;position: absolute;width: 87%;top: 1%;left: 5%;opacity: 0.5;z-index: 2;filter: none;transform: rotate(9deg);"data-opacidad="0.5">
+                    </div>
+
+                    <!--SORACA-->
+                    <svg viewBox="0 0 100 100" class="area-interactiva" id="zonaSoraca"
+                    style="display: none; position: absolute;top: 65.9%;left: 49%;width: 11.5%;height: 27%;z-index: 3;transform: rotate(-9deg); pointer-events: none;">
+                    <polygon points="17,46 31,23 43,27 45,20 55,15 59,0 67,0  90,35 90,45 80,54 82,67 76,73 74,85 69,84 68,75 54,85 52,93 50,100 40,93 36,105 20,97 23,75 1,64 20,55" 
+                        style="pointer-events: auto;" 
+                        fill="rgba(0, 255, 0, 0)"
+                        stroke="black"
+                        stroke-width="0"
+                        data-nombre="Soracá: No contamos con tienda en esta localidad."
+                        onmouseover="cambiarOpacidad('imgSoraca', 0.4), mostrarTooltip(event)"
+                        onmouseout="cambiarOpacidad('imgSoraca', 0.5), ocultarTooltip()"
+                        onmousemove="moverTooltip(event)">
+                    </polygon>
+                    </svg>
+
+                    <div id="zonaSoraca" class="zona Soraca" style="position: absolute; z-index: 1;">
+                        <img id="imgSoraca" src="Img/Boyaca/9.png" style="display: none;position: absolute;width: 91%;top: -1%;left: 1%;opacity: 0.5;z-index: 2;filter: none;transform: rotate(9deg);"data-opacidad="0.5">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="info">
+                <p>i</p>
+            </div>
+            
+            <div id="info-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <p>
+                        Aquí encontrarás el <strong>mapa de Boyacá</strong> dividido por municipios.<br><br>
+                        Los <strong>municipios que tienen color</strong> son aquellos en los que <strong>Homecenter cuenta con una tienda</strong>.<br><br>
+                        Al dar clic en un municipio con color, podrás ver la <strong>información de la tienda</strong> correspondiente.<br><br>
+                        A la derecha verás una <strong>lista de municipios</strong>:<br>
+                        - <strong>Punto verde 🟢</strong>: contamos con tienda.<br>
+                        - <strong>Punto rojo 🔴</strong>: no contamos con tienda.<br><br>
+                        También puedes hacer clic en la lista para ver la información de la tienda que se encuentra en ese municipio.
+                    </p>
+                    
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="info-box" class="info-box"></div>
+
+        <div id="tooltip"></div>
+
+    </div>
+
+    <footer>
+        <div class="Chatbot">
+            <p>Volver al chatbot</p>
+            <img src="Img/Franco_Idel.png" alt="Return" class="ChatFranco">
+        </div>
+
+        <div class="returnCol" id="return-button">
+            <p>Regresar</p>
+            <div class="btnReturn" id="arrow">
+                <p>⬅︎</p>
+            </div>
+        </div>
+    </footer>
+    
+
+</body>
+</html>

@@ -571,56 +571,6 @@
     transform: rotate(9deg);
 }
 
-/*BOLIVAR*/
-.btnBolivar {
-    background: #0071CE;
-    color: white;
-    border: none;
-    padding: 15px 15px;
-    font-size: clamp(0.5rem, 5vw, 1.1em);
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-    height: 45px;
-}
-
-.btnBolivar:hover {
-    background: #003F8A;
-}
-
-.CaribeN{
-    position: absolute;
-    top: 0%;
-    left: 40%;
-    width: 23%;
-    height: 60%;
-    z-index: 1;
-    transform: rotate(-9deg);
-}
-
-.Industrial{
-    position: absolute;
-    top: 29%;
-    left: 29%;
-    width: 26%;
-    height: 70%;
-    z-index: 1;
-}
-
-.VirTur{
-    position: absolute;
-    top: 46%;
-    left: 47.5%;
-    width: 19%;
-    height: 42%;
-    z-index: 1;
-}
-
 /*BOGOTÁ*/
 .btnBogota {
     background: #0071CE;
@@ -820,4 +770,165 @@
     height: 35%;
     z-index: 1;
     transform: rotate(5deg);
+}
+
+/*BOLIVAR*/
+.btnBolivar {
+    background: #0071CE;
+    color: white;
+    border: none;
+    padding: 15px 15px;
+    font-size: clamp(0.5rem, 5vw, 1.1em);
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 45px;
+}
+
+.btnBolivar:hover {
+    background: #003F8A;
+}
+
+.CaribeN{
+    position: absolute;
+    top: 0%;
+    left: 40%;
+    width: 23%;
+    height: 60%;
+    z-index: 1;
+    transform: rotate(-9deg);
+}
+
+.Industrial{
+    position: absolute;
+    top: 29%;
+    left: 29%;
+    width: 26%;
+    height: 70%;
+    z-index: 1;
+}
+
+.VirTur{
+    position: absolute;
+    top: 46%;
+    left: 47.5%;
+    width: 19%;
+    height: 42%;
+    z-index: 1;
+}
+
+/*BOYACA*/
+.btnBoyaca {
+    background: #0071CE;
+    color: white;
+    border: none;
+    padding: 15px 15px;
+    font-size: clamp(0.5rem, 5vw, 1.1em);
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 45px;
+}
+
+.btnBoyaca:hover {
+    background: #003F8A;
+}
+
+.Chiquiza{
+    position: absolute;
+    top: 22.8%;
+    left: 31.3%;
+    width: 17.5%;
+    height: 44%;
+    z-index: 1;
+    transform: rotate(-9deg);
+}
+
+.Sora{
+    position: absolute;
+    top: 49%;
+    left: 34%;
+    width: 13%;
+    height: 18%;
+    z-index: 1;
+    transform: rotate(-9deg);
+}
+
+.Motavita{
+    position: absolute;
+    top: 34%;
+    left: 43%;
+    width: 9.5%;
+    height: 31%;
+    z-index: 1;
+    transform: rotate(-9deg);
+}
+
+.Combita{
+    position: absolute;
+    top: 0%;
+    left: 47%;
+    width: 14.5%;
+    height: 56%;
+    z-index: 1;
+    transform: rotate(-9deg);
+}
+
+.Cucaita{
+    position: absolute;
+    top: 61.5%;
+    left: 35%;
+    width: 10.5%;
+    height: 22%;
+    z-index: 1;
+    transform: rotate(-9deg);
+}
+
+.Tunja{
+    position: absolute;
+    top: 54%;
+    left: 39%;
+    width: 18%;
+    height: 40%;
+    z-index: 1;
+}
+
+.Oicata{
+    position: absolute;
+    top: 37%;
+    left: 53%;
+    width: 12%;
+    height: 23%;
+    z-index: 1;
+    transform: rotate(-9deg);
+}
+
+.Chivata{
+    position: absolute;
+    top: 45%;
+    left: 55%;
+    width: 13%;
+    height: 27%;
+    z-index: 1;
+    transform: rotate(-9deg);
+}
+
+.Soraca{
+    position: absolute;
+    top: 65.9%;
+    left: 49%;
+    width: 11.5%;
+    height: 27%;
+    z-index: 1;
+    transform: rotate(-9deg);
 }
